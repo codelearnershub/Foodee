@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace FOODEE.Models
 {
-    public class MenuMenuItem
+    public class MenuMenuItem: BaseEntity
     {
         public int MenuId { get; set; }
 
