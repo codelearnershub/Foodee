@@ -8,9 +8,9 @@ namespace FOODEE.Models
     public class BaseEntity
     {
         public int Id { get; set; }
-        public int CreatedBy { get; set; }
-        public int ModifiedBy { get; set; }
-        public DateTime OrderDate { get; set; }
-        public int DateLastModified { get; set; }
+        public string CreatedBy { get; set; }
+        public string ModifiedBy { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime DateLastModified { get; set; }
     }
 }
