@@ -12,15 +12,15 @@ namespace FOODEE.Context
         public FoodeeDbContext(DbContextOptions options) : base(options)
         {
         }
-        public DbSet<Customer> Customer { get; set; }
-        public DbSet<Menu> Menu { get; set; }
-        public DbSet<MenuItem> MenuItem { get; set; }
-        public DbSet<Order> Order { get; set; }
-        public DbSet<OrderItem> OrderItem { get; set; }
-        public DbSet<Payment> Payment { get; set; }
-        public DbSet<Role> Role { get; set; }
-        public DbSet<User> User { get; set; }
-        public DbSet<UserRole> UserRole { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Menu> Menus { get; set; }
+        public DbSet<MenuItem> MenuItems { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<Payment> Payments { get; set; }
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<UserRole> UserRoles { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
