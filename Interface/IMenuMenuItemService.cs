@@ -11,8 +11,6 @@ namespace FOODEE.Interface
         public MenuMenuItem Add(MenuMenuItem menumeniitem);
         public MenuMenuItem Update(MenuMenuItem menumenuitem);
         public void Delete(int id);
-        public List<MenuMenuItem> GetAll();
-        public bool Exists(int id);
         public MenuMenuItem FindById(int id);
     }
 }

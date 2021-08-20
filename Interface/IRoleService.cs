@@ -12,7 +12,6 @@ namespace FOODEE.Interface
         public Role Update(Role role);
         public void Delete(int id);
         public List<Role> GetAll();
-        public bool Exists(int id);
         public Role FindById(int id);
     }
 }
