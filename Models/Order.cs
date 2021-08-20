@@ -15,6 +15,6 @@ namespace FOODEE.Models
         public string DeliveryAddress { get; set; }
         public decimal TotalPrice { get; set; }
         public OrderStatus Status { get; set; }
-        public virtual ICollection<OrderItem> OrderItem { get; set; } = new List<OrderItem>();
+        public virtual ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
     }
 }

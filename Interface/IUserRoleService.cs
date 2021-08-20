@@ -9,13 +9,9 @@ namespace FOODEE.Interface
     public interface IUserRoleService
     {
         public UserRole Add(UserRole userrole);
-
         public UserRole Update(UserRole userrole);
-
         public void Delete(int id);
-
         public List<UserRole> GetAll();
-
         public bool Exists(int id);
         public UserRole FindById(int id);
     }
