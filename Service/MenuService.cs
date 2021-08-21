@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FOODEE.Service
 {
-    public class MenuService
+    public class MenuService: IMenuService
     {
         private readonly IMenuRepository menuRepository;
 
