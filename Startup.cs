@@ -2,6 +2,7 @@ using FOODEE.Context;
 using FOODEE.Interface;
 using FOODEE.Repository;
 using FOODEE.Service;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -42,13 +43,28 @@ namespace FOODEE
             services.AddScoped<IOrderService, OrderService>();
             services.AddScoped<IOrderItemRepository, OrderItemRepository>();
             services.AddScoped<IOrderItemService, OrderItemService>();
-            services.AddScoped<ICustomerRepository, CustomerRepository>();
-            services.AddScoped<ICustomerService, CustomerService>();
             services.AddScoped<IRoleRepository, RoleRepository>();
             services.AddScoped<IRoleService, RoleService>();
             services.AddScoped<IUserRoleRepository, UserRoleRepository>();
             services.AddScoped<IUserRoleService, UserRoleService>();
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(config =>
+            {
+                config.LoginPath = "/User/Login";
+                config.LogoutPath = "/User/Logout";
+                config.Cookie.Name = "SimpleUser";
+            });
+            //services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddDistributedMemoryCache();
+            services.AddHttpContextAccessor();
+            services.AddSession(Options =>
+            {
+                Options.IdleTimeout = TimeSpan.FromMinutes(10);
+                Options.Cookie.HttpOnly = true;
+                Options.Cookie.IsEssential = true;
+            });
             services.AddControllersWithViews();
+            services.AddControllersWithViews();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
