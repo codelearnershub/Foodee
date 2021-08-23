@@ -48,6 +48,7 @@ namespace FOODEE
             services.AddScoped<IRoleService, RoleService>();
             services.AddScoped<IUserRoleRepository, UserRoleRepository>();
             services.AddScoped<IUserRoleService, UserRoleService>();
+           options.UseMySQL(Configuration.GetConnectionString("FoodeeDbContext")));
             services.AddControllersWithViews();
         }
 
