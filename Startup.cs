@@ -1,4 +1,7 @@
 using FOODEE.Context;
+using FOODEE.Interface;
+using FOODEE.Repository;
+using FOODEE.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -26,6 +29,25 @@ namespace FOODEE
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<FoodeeDbContext>(options =>
+            options.UseMySQL(Configuration.GetConnectionString("FoodeeDbContext")));
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IMenuItemRepository, MenuItemRepository>();
+            services.AddScoped<IMenuItemService, MenuItemService>();
+            services.AddScoped<IMenuRepository, MenuRepository>();
+            services.AddScoped<IMenuService, MenuService>();
+            services.AddScoped<IMenuMenuItemRepository, MenuMenuItemRepository>();
+            services.AddScoped<IMenuMenuItemService, MenuMenuItemService>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped<IOrderService, OrderService>();
+            services.AddScoped<IOrderItemRepository, OrderItemRepository>();
+            services.AddScoped<IOrderItemService, OrderItemService>();
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddScoped<ICustomerService, CustomerService>();
+            services.AddScoped<IRoleRepository, RoleRepository>();
+            services.AddScoped<IRoleService, RoleService>();
+            services.AddScoped<IUserRoleRepository, UserRoleRepository>();
+            services.AddScoped<IUserRoleService, UserRoleService>();
            options.UseMySQL(Configuration.GetConnectionString("FoodeeDbContext")));
             services.AddControllersWithViews();
         }
