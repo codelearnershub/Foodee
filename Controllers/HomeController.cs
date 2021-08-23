@@ -1,4 +1,5 @@
-﻿using FOODEE.Models;
+﻿using FOODEE.Interface;
+using FOODEE.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -12,18 +13,29 @@ namespace FOODEE.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IMenuItemService _menuitemService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IMenuItemService menuitemService, ILogger<HomeController> logger)
         {
             _logger = logger;
+            _menuitemService = menuitemService;
         }
-
         public IActionResult Index()
+        {
+            var menuitems = _menuitemService.GetAll();
+            return View(menuitems);
+        }
+        public IActionResult Privacy()
         {
             return View();
         }
-
-        public IActionResult Privacy()
+        [HttpPost]
+        public IActionResult Search(string search)
+        {
+            IEnumerable<MenuItem> menuitems = _menuitemService.Search(search);
+            return View("Index", menuitems);
+        }
+        public IActionResult ViewCart()
         {
             return View();
         }

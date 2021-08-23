@@ -9,6 +9,7 @@ namespace FOODEE.Interface
     public interface IUserService
     {
         public User LoginUser(string email, string password);
-        public void RegisterUser(int id, string gender, string password, int userId, string userEmail, string firstName, string lastName, string address, long phoneNumber);
+        public void RegisterUser(int id, string firstName, string lastName, string address, long phoneNumber, string Email, string gender, string password);
+
     }
 }
