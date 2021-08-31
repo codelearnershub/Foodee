@@ -17,12 +17,10 @@ namespace FOODEE.Controllers
         {
             _orderService = orderService;
         }
-        //[Authorize(Roles = "Admin")]
         public IActionResult Index()
         {
             return View(_orderService.GetAll());
         }
-        //[Authorize(Roles = "Admin")]
         public IActionResult Details(int? id)
         {
             if (id == null)

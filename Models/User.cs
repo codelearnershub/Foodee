@@ -17,6 +17,6 @@ namespace FOODEE.Models
         public string Gender { get; set; }
         public string PasswordHash { get; set; }
         public string HashSalt { get; set; }
-        public List<UserRole> UserRole { get; set; }
+        public List<UserRole> UserRoles { get; set; }
     }
 }

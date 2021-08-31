@@ -27,7 +27,52 @@ namespace FOODEE.Context
             modelBuilder.Entity<OrderItem>(o =>
             {
                 o.HasIndex(o => new { o.MenuId, o.OrderId }).IsUnique();
+
+                modelBuilder.Entity<User>().Property(u => u.Id).IsRequired();
+                modelBuilder.Entity<Role>().HasIndex(u => u.Id).IsUnique();
+                modelBuilder.Entity<User>().HasIndex(u => u.Email).IsUnique();
+                modelBuilder.Entity<MenuItem>().HasKey(s => s.Id);
+                modelBuilder.Entity<Order>().HasKey(s => s.Id);
+                modelBuilder.Entity<OrderItem>().HasKey(s => s.Id);
+                modelBuilder.Entity<User>().Property(u => u.Email)
+                    .IsRequired();
+                modelBuilder.Entity<UserRole>().HasKey(ur => ur.Id);
+                modelBuilder.Entity<UserRole>().HasIndex(U => U.userId);
+                modelBuilder.Entity<UserRole>().HasIndex(u => u.RoleId);
+                modelBuilder.Entity<User>().HasMany(u => u.UserRoles)
+                    .WithOne(ur => ur.User)
+                    .HasForeignKey(ur => ur.userId);
+                modelBuilder.Entity<Role>().HasMany(r => r.UserRoles)
+                    .WithOne(r => r.Role)
+                    .HasForeignKey(r => r.RoleId);
+                modelBuilder.Entity<User>().HasData(
+                      new User
+                      {
+                          Id = 1,
+                          FirstName = "Habeebah",
+                          LastName = "Olowonmi",
+                          Gender = "Female",
+                          Email = "olowonmiadejoke@gmail.com",
+                          PhoneNumber = 09039513977,
+                          Address = "Asero,Abk",
+                          PasswordHash = "SehzKv9PAiawVd3TeV1QkkgBlCz67YoY7WMm4FB836c=",
+                          HashSalt = "d+RzYMAQvvCJ+aNedX1uDg=="
+                      }
+                    );
+                modelBuilder.Entity<Role>().HasData(
+                 new Role { Id = 1, Name = "SuperAdmin", CreatedAt = DateTime.Now }, new Role { Id = 2, Name = "Admin", CreatedAt = DateTime.Now }, new Role { Id = 3, Name = "Customer", CreatedAt = DateTime.Now }
+                );
+                modelBuilder.Entity<UserRole>().HasData(new UserRole { Id = 1, userId = 1, RoleId = 1, CreatedAt = DateTime.Now });
+
+                base.OnModelCreating(modelBuilder);
+
+                modelBuilder.Entity<Menu>().HasMany(m => m.MenuItems)
+                .WithOne(m => m.Manu)
+                .HasForeignKey(m => m.MenuId).OnDelete(DeleteBehavior.Restrict);
+                modelBuilder.Entity<MenuItem>().HasMany(m => m.Menus)
+                .WithOne(m => m.MenuItem)
+                .HasForeignKey(m => m.MenuItemId).OnDelete(DeleteBehavior.Restrict);
             });
-        }
+        }    
     }
 }

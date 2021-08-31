@@ -42,7 +42,7 @@ namespace FOODEE.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public IActionResult Add()
         {
             return View();
         }
@@ -94,8 +94,8 @@ namespace FOODEE.Controllers
         [HttpPut]
         public IActionResult Update(int? id, Menu menu)
         {
-            var category = _menuService.FindById(id.Value);
-            if (category == null)
+            var menud = _menuService.FindById(id.Value);
+            if (menud == null)
             {
                 return NotFound();
             }

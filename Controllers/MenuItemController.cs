@@ -65,13 +65,13 @@ namespace FOODEE.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(MenuItem menuitem, IFormFile file)
+        public IActionResult Add(MenuItem menuitem, IFormFile file)
         {
             if (ModelState.IsValid)
             {
                 if (file != null)
                 {
-                    string imageDirectory = Path.Combine(_webHostEnvironment.WebRootPath, "images");
+                    string imageDirectory = Path.Combine(_webHostEnvironment.WebRootPath, "Image");
                     Directory.CreateDirectory(imageDirectory);
                     string contentType = file.ContentType.Split('/')[1];
                     string fileName = $"{Guid.NewGuid()}.{contentType}";

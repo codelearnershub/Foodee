@@ -38,7 +38,7 @@ namespace FOODEE.Service
 
             return null;
         }
-        public void RegisterUser(int id, string gender, string password, int userId, string userEmail, string firstName, string lastName, string address, long phoneNumber)
+        public void RegisterUser(int id, string firstName, string lastName, string address, long phoneNumber, string Email, string gender, string password)
         {
             byte[] salt = new byte[128 / 8];
 
@@ -54,13 +54,14 @@ namespace FOODEE.Service
             User user = new User
             {
                 Id = id,
-                Email = userEmail,
+                Email = Email,
                 HashSalt = saltString,
                 PasswordHash = hashedPassword,
             };
 
             userRepository.Add(user);
         }
+
         private string HashPassword(string password, string salt)
         {
             byte[] saltByte = Convert.FromBase64String(salt);

@@ -53,7 +53,6 @@ namespace FOODEE
                 config.LogoutPath = "/User/Logout";
                 config.Cookie.Name = "SimpleUser";
             });
-            //services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddDistributedMemoryCache();
             services.AddHttpContextAccessor();
             services.AddSession(Options =>
