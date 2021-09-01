@@ -62,6 +62,7 @@ namespace FOODEE
                 Options.Cookie.IsEssential = true;
             });
             services.AddControllersWithViews();
+           options.UseMySQL(Configuration.GetConnectionString("FoodeeDbContext")));
             services.AddControllersWithViews();
 
         }
