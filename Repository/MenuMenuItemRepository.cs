@@ -1,4 +1,5 @@
 ﻿using FOODEE.Context;
+using FOODEE.Interface;
 using FOODEE.Models;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FOODEE.Repository
 {
-    public class MenuMenuItemRepository
+    public class MenuMenuItemRepository:IMenuMenuItemRepository
     {
         private readonly FoodeeDbContext _dbContext;
         public MenuMenuItemRepository(FoodeeDbContext dbContext)
@@ -42,6 +43,5 @@ namespace FOODEE.Repository
                 _dbContext.SaveChanges();
             }
         }
-
     }
 }

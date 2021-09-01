@@ -1,4 +1,5 @@
 ﻿using FOODEE.Context;
+using FOODEE.Interface;
 using FOODEE.Models;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FOODEE.Repository
 {
-    public class UserRoleRepository
+    public class UserRoleRepository: IUserRoleRepository
     {
         private readonly FoodeeDbContext _dbContext;
         public UserRoleRepository(FoodeeDbContext dbContext)
@@ -24,7 +25,10 @@ namespace FOODEE.Repository
         {
             return _dbContext.UserRoles.Find(id);
         }
-
+        public List<UserRole> FindUserRoles(int userId)
+        {
+            return _dbContext.UserRoles.Where(ur => ur.userId == userId).ToList();
+        }
         public void Delete(int id)
         {
             var userrole = FindById(id);

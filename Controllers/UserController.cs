@@ -20,13 +20,11 @@ namespace FOODEE.Controllers
         {
             _userService = userService;
         }
-
         public IActionResult Index()
         {
 
             return View();
         }
-
         [HttpGet]
         public IActionResult Register()
         {
@@ -39,8 +37,7 @@ namespace FOODEE.Controllers
 
             _userService.RegisterUser(model.Id, model.FirstName, model.LastName, model.Address, model.PhoneNumber, model.Email, model.Gender,model.Password);
             return View();
-    }
-
+        }
         [HttpGet]
         public IActionResult Login()
         {
@@ -79,7 +76,6 @@ namespace FOODEE.Controllers
                 return isMenu ? RedirectToAction("Menu", "Order") : RedirectToAction("Index", "Home");
             }
         }
-
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync();

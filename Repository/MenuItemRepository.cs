@@ -1,4 +1,5 @@
 ﻿using FOODEE.Context;
+using FOODEE.Interface;
 using FOODEE.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace FOODEE.Repository
 {
-    public class MenuItemRepository
+    public class MenuItemRepository:IMenuItemRepository
     {
         private readonly FoodeeDbContext _dbContext;
         public MenuItemRepository(FoodeeDbContext dbContext)

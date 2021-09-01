@@ -9,6 +9,6 @@ namespace FOODEE.Models
     {
         public string Name { get; set; }
 
-        public List<UserRole> UserRole { get; set; }
+        public List<UserRole> UserRoles { get; set; }
     }
 }

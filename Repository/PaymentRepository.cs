@@ -1,4 +1,5 @@
 ﻿using FOODEE.Context;
+using FOODEE.Interface;
 using FOODEE.Models;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FOODEE.Repository
 {
-    public class PaymentRepository
+    public class PaymentRepository: IPaymentRepository
     {
         private readonly FoodeeDbContext _dbContext;
         public PaymentRepository(FoodeeDbContext dbContext)

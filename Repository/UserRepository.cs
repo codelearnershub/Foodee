@@ -1,4 +1,5 @@
 ﻿using FOODEE.Context;
+using FOODEE.Interface;
 using FOODEE.Models;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FOODEE.Repository
 {
-    public class UserRepository
+    public class UserRepository: IUserRepository
     {
         private readonly FoodeeDbContext _dbContext;
         public UserRepository(FoodeeDbContext dbContext)
@@ -43,6 +44,15 @@ namespace FOODEE.Repository
         public User FindByEmail(string email)
         {
             return _dbContext.Users.FirstOrDefault(c => c.Email == email);
+        }
+        public List<UserRole> FindUserRoles(int userId)
+        {
+            return _dbContext.UserRoles.Where(ur => ur.userId == userId).ToList();
+        }
+
+        public User FindUserById(int id)
+        {
+            return _dbContext.Users.FirstOrDefault(u => u.Id.Equals(id));
         }
         public List<User> GetAll()
         {

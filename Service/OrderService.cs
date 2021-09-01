@@ -46,13 +46,13 @@ namespace FOODEE.Service
             return orderRepository.Exists(id);
         }
 
-        public List<OrderItem> Menu(int customerId, IEnumerable<Menu> orderItems, string deliveryAddress)
+        public List<OrderItem> Menu(int userId, IEnumerable<Menu> orderItems, string deliveryAddress)
         {
             var menuitemDictionary = orderItems.ToDictionary(o => o.MenuItemId);
             var menuitems = menuitemRepository.GetAll(menuitemDictionary.Keys);
             var order = new Order
             {
-                CustomerId = customerId,
+                Id = userId,
                 DeliveryAddress = deliveryAddress,
                 Status = OrderStatus.Default,
                 CreatedAt = DateTime.Now

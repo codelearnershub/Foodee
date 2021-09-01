@@ -1,0 +1,75 @@
+﻿@model FOODEE.Models.ViewModel.CreateUserViewModel
+    <div class="main">
+
+        <div class="container">
+            <div class="booking-content">
+                <div class="booking-image">
+                    <img class="booking-img" src="images/form-img.jpg" alt="Booking Image">
+                </div>
+                <div class="booking-form">
+                    <form id="booking-form">
+                        <h2>Sign Up Here!</h2>
+                        <div class="form-group form-input">
+                            <input asp-for="FirstName" class="form-control" type="text" name="name" value="" required />
+                            <label for="name" class="form-label">Your FirstName name</label>
+                            <span asp-validation-for="FirstName" class="text-danger"></span><br>
+                        </div>
+                        <div class="form-group form-input">
+                            <input asp-for="LastName" class="form-control" type="text" name="name" value="" required />
+                            <label for="name" class="form-label">Your LastName name</label>
+                            <span asp-validation-for="LastName" class="text-danger"></span><br>
+                        </div>
+                        <div class="form-group form-input">
+                            <input asp-for="Email" class="form-control" type="text" name="name" value="" required />
+                            <label for="name" class="form-label">Email</label>
+                            <span asp-validation-for="Email" class="text-danger"></span><br>
+                        </div>
+                        <div class="form-group form-input">
+                            <input type="password" asp-for="Password" class="form-control" value="" required />
+                            <label for="name" class="form-label">Create Password</label>
+                            <span asp-validation-for="Password" class="text-danger"></span><br>
+                        </div>
+                        <div class="form-group form-input">
+                            <input type="password" asp-for="ConfirmPassword" class="form-control" value="" required />
+                            <label for="name" class="form-label">ConfirmPassword</label>
+                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span><br>
+                        </div>
+                        <div class="form-group form-input">
+                            <input type="number" asp-for="PhoneNumber" class="form-control" value="" required />
+                            <label for="name" class="form-label">PhoneNumber</label>
+                            <span asp-validation-for="PhoneNumber" class="text-danger"></span><br>
+                        </div>
+                        <div class="form-group form-input">
+                            <textarea asp-for="Address" class="form-control" value="" required></textarea>
+                            <label for="name" class="form-label">Address</label>
+                            <span asp-validation-for="Address" class="text-danger"></span><br>
+                        </div>
+                        <div class="form-group form-input">
+                            <input asp-for="Gender" type="radio" id="Male" name="gender" value="Male" />
+                            <label for="Male">Male</label>
+
+                            <input asp-for="Gender" type="radio" id="Female" name="gender" value="Female" />
+                            <label for="Female">Female</label>
+
+                            <span asp-validation-for="Gender" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="submit" value="Register" class="btn" style="background:orchid" />
+                            <span class="mr-3">
+                                Already Registered?<a asp-area="" asp-controller="User" asp-action="Login">
+                                    Login
+                                    Here
+                                </a>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

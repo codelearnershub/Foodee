@@ -11,5 +11,6 @@ namespace FOODEE.Interface
         public User LoginUser(string email, string password);
         public void RegisterUser(int id, string firstName, string lastName, string address, long phoneNumber, string Email, string gender, string password);
 
+
     }
 }
