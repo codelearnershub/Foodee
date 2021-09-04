@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FOODEE.Context
 {
-    public class FoodeeDbContext: DbContext
+    public class FoodeeDbContext : DbContext
     {
         public FoodeeDbContext(DbContextOptions options) : base(options)
         {
@@ -37,11 +37,11 @@ namespace FOODEE.Context
                 modelBuilder.Entity<User>().Property(u => u.Email)
                     .IsRequired();
                 modelBuilder.Entity<UserRole>().HasKey(ur => ur.Id);
-                modelBuilder.Entity<UserRole>().HasIndex(U => U.userId);
+                modelBuilder.Entity<UserRole>().HasIndex(U => U.UserId);
                 modelBuilder.Entity<UserRole>().HasIndex(u => u.RoleId);
                 modelBuilder.Entity<User>().HasMany(u => u.UserRoles)
                     .WithOne(ur => ur.User)
-                    .HasForeignKey(ur => ur.userId);
+                    .HasForeignKey(ur => ur.UserId);
                 modelBuilder.Entity<Role>().HasMany(r => r.UserRoles)
                     .WithOne(r => r.Role)
                     .HasForeignKey(r => r.RoleId);
@@ -51,18 +51,20 @@ namespace FOODEE.Context
                           Id = 1,
                           FirstName = "Habeebah",
                           LastName = "Olowonmi",
+                          CreatedAt = DateTime.Now,
                           Gender = "Female",
                           Email = "olowonmiadejoke@gmail.com",
                           PhoneNumber = 09039513977,
                           Address = "Asero,Abk",
-                          PasswordHash = "SehzKv9PAiawVd3TeV1QkkgBlCz67YoY7WMm4FB836c=",
-                          HashSalt = "d+RzYMAQvvCJ+aNedX1uDg=="
+                          PasswordHash = "HH0bJTATP53nCkvQPacCkjlviZs1bb+BpbyrtOhOHgc=",
+                          HashSalt = "oRG1o9cidyVnRFgsWQN7AA=="
                       }
                     );
                 modelBuilder.Entity<Role>().HasData(
                  new Role { Id = 1, Name = "SuperAdmin", CreatedAt = DateTime.Now }, new Role { Id = 2, Name = "Admin", CreatedAt = DateTime.Now }, new Role { Id = 3, Name = "Customer", CreatedAt = DateTime.Now }
                 );
-                modelBuilder.Entity<UserRole>().HasData(new UserRole { Id = 1, userId = 1, RoleId = 1, CreatedAt = DateTime.Now });
+
+                modelBuilder.Entity<UserRole>().HasData(new UserRole { Id = 1, UserId = 1, RoleId = 1, CreatedAt = DateTime.Now });
 
                 base.OnModelCreating(modelBuilder);
 
@@ -73,6 +75,6 @@ namespace FOODEE.Context
                 .WithOne(m => m.MenuItem)
                 .HasForeignKey(m => m.MenuItemId).OnDelete(DeleteBehavior.Restrict);
             });
-        }    
-    }
+        }
+    }   
 }

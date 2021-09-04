@@ -20,6 +20,11 @@ namespace FOODEE.Service
             return roleRepository.FindById(id);
         }
 
+        public Role FindByName(string name) 
+        {
+            return roleRepository.FindByName(name);
+        }
+
         public Role Add(Role role)
         {
             return roleRepository.Add(role);

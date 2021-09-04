@@ -53,7 +53,7 @@ namespace FOODEE.Models.ViewModel
         [Required(ErrorMessage = "Gender is required")]
         [Display(Name = "Gender:")]
         public string Gender { get; set; }
-        //internal string firstname;
+ 
         [Required(ErrorMessage = "User Password is required")]
         [Display(Name = "Password")]
         public string Password { get; set; }

@@ -34,6 +34,11 @@ namespace FOODEE.Repository
         {
             return _dbContext.Roles.Find(id);
         }
+
+        public Role FindByName(string name)
+        {
+            return _dbContext.Roles.FirstOrDefault(r => r.Name == name);
+        }
         public Role Update(Role role)
         {
             _dbContext.Roles.Update(role);

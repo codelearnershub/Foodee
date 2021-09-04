@@ -120,9 +120,14 @@ namespace FOODEE.Controllers
         }
 
 
-        public IActionResult Menu()
+        public IActionResult CheckOut()
         {
-            return View();
+            if(User.Identity.IsAuthenticated)
+            {
+                return View();
+            }
+
+            return RedirectToAction("Login","User");
         }
 
 

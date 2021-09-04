@@ -1,0 +1,67 @@
+﻿<div class="rower">
+    <div class="coler-75">
+        <div class="containerer">
+                <form id="checkout" method="post" asp-action="CheckOut">
+                    <div class="row">
+                        <div class="form-group col-sm-12">
+                            <label class="control-label">DeliveryAddress</label>
+                            <input name="DeliveryAddress" placeholder="DeliveryAddress" class="form-control" />
+                        </div>
+                        <button href="#myModal" type="button" onclick="submitCheckoutForm(this)" value="Continue to checkout" class="btn btn-success trigger-btn">Continue to checkout</button>
+                    </div>
+                </form>
+        </div>
+    </div>
+
+    <div class="coler-25">
+        <div class="containerer">
+            <div class="notification text-success">
+                <h5>
+                    Shopping Basket<i class="fa fa-fw fa-shopping-cart"></i><span class="badge" id='newTotalQuantityLabel'></span>
+
+                </h5>
+            </div>
+            <div class="card-body " id="cart-menu">
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<div id="myModal" class="modal fade">
+    <div class="modal-dialog modal-confirm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="icon-box">
+                    <i class="material-icons">&#xE876;</i>
+                </div>
+                <h4 class="modal-title w-100">Awesome!</h4>
+            </div>
+            <div class="modal-body">
+                <p class="text-center">Your booking has been confirmed. Check your email for detials.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success btn-block" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+
+    <script>
+        function submitCheckoutForm(e) {
+            let form = document.querySelector("#checkout");
+            const cart = localStorage.getItem("cart") || "[]";
+            const json = JSON.parse(cart);
+            let count = 0;
+            json.forEach(item => {
+                $('#checkout').append(`<input type='hidden' name='orders[${count}].Id' value='${menuitem.Id}' />`);
+                $('#checkout').append(`<input type='hidden' name='orders[${count}].quantity' value='${menuitem.quantity}' />`);
+                count++;
+            });
+            form.submit();
+        }
+    </script>
+}

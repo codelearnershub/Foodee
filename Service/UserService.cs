@@ -1,4 +1,5 @@
-﻿using FOODEE.Interface;
+﻿using FOODEE.DTO;
+using FOODEE.Interface;
 using FOODEE.Models;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using System;
@@ -12,10 +13,12 @@ namespace FOODEE.Service
     public class UserService: IUserService
     {
         private readonly IUserRepository userRepository;
+        private readonly IRoleRepository _roleRepository;
 
-        public UserService(IUserRepository userRepository)
+        public UserService(IUserRepository userRepository, IRoleRepository roleRepository)
         {
             this.userRepository = userRepository;
+            _roleRepository = roleRepository;
         }
 
         public User LoginUser(string email, string password)
@@ -38,7 +41,7 @@ namespace FOODEE.Service
 
             return null;
         }
-        public void RegisterUser(int id, string firstName, string lastName, string address, long phoneNumber, string Email, string gender, string password)
+        public void RegisterUser(CreateUserDto createUserDto)
         {
             byte[] salt = new byte[128 / 8];
 
@@ -49,19 +52,34 @@ namespace FOODEE.Service
 
             string saltString = Convert.ToBase64String(salt);
 
-            string hashedPassword = HashPassword(password, saltString);
+            string hashedPassword = HashPassword(createUserDto.Password , saltString);
+
+            var role = _roleRepository.FindByName("Customer").Id;
+
+            var userRoles = new List<UserRole>();
+            {
+                new UserRole
+                {
+                    RoleId = role,
+                    UserId = createUserDto.Id
+                };
+            };
 
             User user = new User
             {
-                Id = id,
-                Email = Email,
+                Id = createUserDto.Id,
+                FirstName = createUserDto.FirstName,
+                LastName = createUserDto.LastName,
+                Address = createUserDto.Address,
+                PhoneNumber = createUserDto.PhoneNumber,
+                Email = createUserDto.Email,
+                Gender = createUserDto.Gender,
                 HashSalt = saltString,
                 PasswordHash = hashedPassword,
             };
 
             userRepository.Add(user);
         }
-
         private string HashPassword(string password, string salt)
         {
             byte[] saltByte = Convert.FromBase64String(salt);
