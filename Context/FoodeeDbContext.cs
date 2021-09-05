@@ -56,7 +56,7 @@ namespace FOODEE.Context
                           Email = "olowonmiadejoke@gmail.com",
                           PhoneNumber = 09039513977,
                           Address = "Asero,Abk",
-                          PasswordHash = "HH0bJTATP53nCkvQPacCkjlviZs1bb+BpbyrtOhOHgc=",
+                          PasswordHash = "6prgwCkzdfZ/oANfSVHfdcE7vzXvVhWSA5WXj8AhHxs=",
                           HashSalt = "oRG1o9cidyVnRFgsWQN7AA=="
                       }
                     );

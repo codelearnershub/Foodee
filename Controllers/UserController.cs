@@ -63,74 +63,33 @@ namespace FOODEE.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(LoginViewModel vm, bool isMenu = false)
+        public async Task<IActionResult> Login(LoginViewModel vm)
         {
             User user = _userService.LoginUser(vm.Email, vm.Password);
 
             if (user == null) return View();
 
-            var roles = _userRoleService.FindUserRoles(user.Id);
-
-            var role = roles[0].Name;
-
-            if (user == null)
+            var roles = new List<Role>();
+            foreach(var UserRole in user.UserRoles)
             {
-                ViewBag.Message = "Invalid Username/Password";
-                if (isMenu)
-                {
-                    return RedirectToAction("Menu", "Order");
-                }
-
+                roles.Add(UserRole.Role);
             }
-            else if (role == "SuperAdmin")
-            {
-               var claims = new List<Claim>
+            var claims = new List<Claim>
                {
                  new Claim(ClaimTypes.Name, $"{user.FirstName}"),
                  new Claim(ClaimTypes.GivenName, $"{user.FirstName} {user.LastName}"),
                  new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                 new Claim(ClaimTypes.Email, user.Email),
-                 new Claim(ClaimTypes.Role, "SuperAdmin"),
+                 new Claim(ClaimTypes.Email, user.Email)
                };
-                var claimsIdentity = new ClaimsIdentity(claims,CookieAuthenticationDefaults.AuthenticationScheme);
-                var props = new AuthenticationProperties();
-                var principal = new ClaimsPrincipal(claimsIdentity);
-                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal,props);
-                return isMenu ? RedirectToAction("Menu", "Order") : RedirectToAction("Index", "SuperAdmin");
-            }
-            else if (role == "Admin")
+            foreach(var role in roles)
             {
-                var claims = new List<Claim>
-               {
-                 new Claim(ClaimTypes.Name, $"{user.FirstName}"),
-                 new Claim(ClaimTypes.GivenName, $"{user.FirstName} {user.LastName}"),
-                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                 new Claim(ClaimTypes.Email, user.Email),
-                 new Claim(ClaimTypes.Role, "Admin"),
-               };
-                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-                var props = new AuthenticationProperties();
-                var principal = new ClaimsPrincipal(claimsIdentity);
-                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, props);
-                return isMenu ? RedirectToAction("Menu", "Order") : RedirectToAction("Index", "Admin");
+                claims.Add(new Claim(ClaimTypes.Role, role.Name));
             }
-            else if (role == "Customer")
-            {
-                var claims = new List<Claim>
-               {
-                 new Claim(ClaimTypes.Name, $"{user.FirstName}"),
-                 new Claim(ClaimTypes.GivenName, $"{user.FirstName} {user.LastName}"),
-                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                 new Claim(ClaimTypes.Email, user.Email),
-                 new Claim(ClaimTypes.Role, "Customer"),
-               };
-                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-                var props = new AuthenticationProperties();
-                var principal = new ClaimsPrincipal(claimsIdentity);
-                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, props);
-                return isMenu ? RedirectToAction("Menu", "Order") : RedirectToAction("Index", "Home");
-            }
-            return View();
+            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            var props = new AuthenticationProperties();
+            var principal = new ClaimsPrincipal(claimsIdentity);
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, props);
+            return RedirectToAction("Menu", "Order");
         }
         public async Task<IActionResult> Logout()
         {

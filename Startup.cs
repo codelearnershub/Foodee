@@ -60,9 +60,9 @@ namespace FOODEE
                 Options.IdleTimeout = TimeSpan.FromMinutes(10);
                 Options.Cookie.HttpOnly = true;
                 Options.Cookie.IsEssential = true;
+
             });
             services.AddControllersWithViews();
-           options.UseMySQL(Configuration.GetConnectionString("FoodeeDbContext")));
             services.AddControllersWithViews();
 
         }
