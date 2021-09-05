@@ -4,7 +4,7 @@ using MySql.Data.EntityFrameworkCore.Metadata;
 
 namespace FOODEE.Migrations
 {
-    public partial class NEW : Migration
+    public partial class Add : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,10 +14,8 @@ namespace FOODEE.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    CreatedBy = table.Column<string>(nullable: true),
-                    ModifiedBy = table.Column<string>(nullable: true),
                     CreatedAt = table.Column<DateTime>(nullable: false),
-                    DateLastModified = table.Column<DateTime>(nullable: false),
+                    DateLastModified = table.Column<DateTime>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     Quantity = table.Column<int>(nullable: false),
                     Description = table.Column<string>(nullable: true),
@@ -36,12 +34,11 @@ namespace FOODEE.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    CreatedBy = table.Column<string>(nullable: true),
-                    ModifiedBy = table.Column<string>(nullable: true),
                     CreatedAt = table.Column<DateTime>(nullable: false),
-                    DateLastModified = table.Column<DateTime>(nullable: false),
+                    DateLastModified = table.Column<DateTime>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     MenuItemId = table.Column<int>(nullable: false),
+                    DisplayOrder = table.Column<int>(nullable: false),
                     Description = table.Column<string>(nullable: true),
                     Quantity = table.Column<int>(nullable: false)
                 },
@@ -56,10 +53,8 @@ namespace FOODEE.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    CreatedBy = table.Column<string>(nullable: true),
-                    ModifiedBy = table.Column<string>(nullable: true),
                     CreatedAt = table.Column<DateTime>(nullable: false),
-                    DateLastModified = table.Column<DateTime>(nullable: false),
+                    DateLastModified = table.Column<DateTime>(nullable: true),
                     Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -73,10 +68,8 @@ namespace FOODEE.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    CreatedBy = table.Column<string>(nullable: true),
-                    ModifiedBy = table.Column<string>(nullable: true),
                     CreatedAt = table.Column<DateTime>(nullable: false),
-                    DateLastModified = table.Column<DateTime>(nullable: false),
+                    DateLastModified = table.Column<DateTime>(nullable: true),
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
                     Address = table.Column<string>(nullable: true),
@@ -97,10 +90,8 @@ namespace FOODEE.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    CreatedBy = table.Column<string>(nullable: true),
-                    ModifiedBy = table.Column<string>(nullable: true),
                     CreatedAt = table.Column<DateTime>(nullable: false),
-                    DateLastModified = table.Column<DateTime>(nullable: false),
+                    DateLastModified = table.Column<DateTime>(nullable: true),
                     MenuId = table.Column<int>(nullable: false),
                     MenuItemId = table.Column<int>(nullable: false)
                 },
@@ -127,10 +118,8 @@ namespace FOODEE.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    CreatedBy = table.Column<string>(nullable: true),
-                    ModifiedBy = table.Column<string>(nullable: true),
                     CreatedAt = table.Column<DateTime>(nullable: false),
-                    DateLastModified = table.Column<DateTime>(nullable: false),
+                    DateLastModified = table.Column<DateTime>(nullable: true),
                     userId = table.Column<int>(nullable: false),
                     IsPaid = table.Column<bool>(nullable: false),
                     DeliveryAddress = table.Column<string>(nullable: true),
@@ -154,10 +143,8 @@ namespace FOODEE.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    CreatedBy = table.Column<string>(nullable: true),
-                    ModifiedBy = table.Column<string>(nullable: true),
                     CreatedAt = table.Column<DateTime>(nullable: false),
-                    DateLastModified = table.Column<DateTime>(nullable: false),
+                    DateLastModified = table.Column<DateTime>(nullable: true),
                     OrderId = table.Column<int>(nullable: false),
                     UserId = table.Column<int>(nullable: false)
                 },
@@ -178,11 +165,10 @@ namespace FOODEE.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    CreatedBy = table.Column<string>(nullable: true),
-                    ModifiedBy = table.Column<string>(nullable: true),
                     CreatedAt = table.Column<DateTime>(nullable: false),
-                    DateLastModified = table.Column<DateTime>(nullable: false),
-                    userId = table.Column<int>(nullable: false),
+                    DateLastModified = table.Column<DateTime>(nullable: true),
+                    Name = table.Column<string>(nullable: true),
+                    UserId = table.Column<int>(nullable: false),
                     RoleId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -195,8 +181,8 @@ namespace FOODEE.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UserRoles_Users_userId",
-                        column: x => x.userId,
+                        name: "FK_UserRoles_Users_UserId",
+                        column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -208,10 +194,8 @@ namespace FOODEE.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    CreatedBy = table.Column<string>(nullable: true),
-                    ModifiedBy = table.Column<string>(nullable: true),
                     CreatedAt = table.Column<DateTime>(nullable: false),
-                    DateLastModified = table.Column<DateTime>(nullable: false),
+                    DateLastModified = table.Column<DateTime>(nullable: true),
                     OrderId = table.Column<int>(nullable: false),
                     MenuId = table.Column<int>(nullable: false),
                     MenuItemId = table.Column<int>(nullable: false),
@@ -234,26 +218,6 @@ namespace FOODEE.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.InsertData(
-                table: "Roles",
-                columns: new[] { "Id", "CreatedAt", "CreatedBy", "DateLastModified", "ModifiedBy", "Name" },
-                values: new object[,]
-                {
-                    { 1, new DateTime(2021, 8, 30, 17, 25, 46, 514, DateTimeKind.Local).AddTicks(8290), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "SuperAdmin" },
-                    { 2, new DateTime(2021, 8, 30, 17, 25, 46, 521, DateTimeKind.Local).AddTicks(4556), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Admin" },
-                    { 3, new DateTime(2021, 8, 30, 17, 25, 46, 521, DateTimeKind.Local).AddTicks(4683), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Customer" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Users",
-                columns: new[] { "Id", "Address", "CreatedAt", "CreatedBy", "DateLastModified", "Email", "FirstName", "Gender", "HashSalt", "LastName", "ModifiedBy", "PasswordHash", "PhoneNumber" },
-                values: new object[] { 1, "Asero,Abk", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "olowonmiadejoke@gmail.com", "Habeebah", "Female", "d+RzYMAQvvCJ+aNedX1uDg==", "Olowonmi", null, "SehzKv9PAiawVd3TeV1QkkgBlCz67YoY7WMm4FB836c=", 9039513977L });
-
-            migrationBuilder.InsertData(
-                table: "UserRoles",
-                columns: new[] { "Id", "CreatedAt", "CreatedBy", "DateLastModified", "ModifiedBy", "RoleId", "userId" },
-                values: new object[] { 1, new DateTime(2021, 8, 30, 17, 25, 46, 522, DateTimeKind.Local).AddTicks(4890), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 1, 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_MenuMenuItems_MenuId",
@@ -303,9 +267,9 @@ namespace FOODEE.Migrations
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserRoles_userId",
+                name: "IX_UserRoles_UserId",
                 table: "UserRoles",
-                column: "userId");
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_Email",

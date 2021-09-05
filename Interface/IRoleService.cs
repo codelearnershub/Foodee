@@ -13,5 +13,6 @@ namespace FOODEE.Interface
         public void Delete(int id);
         public List<Role> GetAll();
         public Role FindById(int id);
+        public Role FindByName(string name);
     }
 }

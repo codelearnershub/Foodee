@@ -1,4 +1,5 @@
-﻿using FOODEE.Models;
+﻿using FOODEE.DTO;
+using FOODEE.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ namespace FOODEE.Interface
 {
     public interface IMenuItemService
     {
-        public MenuItem Add(MenuItem menuitem);
+        public MenuItem Add(MenuItemDto menuitemDto);
         public MenuItem Update(MenuItem menuitem);
         public void Delete(int id);
         public List<MenuItem> GetAll();

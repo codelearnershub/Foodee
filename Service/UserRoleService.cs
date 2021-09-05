@@ -19,7 +19,10 @@ namespace FOODEE.Service
         {
             return userroleRepository.FindById(id);
         }
-
+        public List<UserRole> FindUserRoles(int userId)
+        {
+            return userroleRepository.FindUserRoles(userId);
+        }
         public UserRole Add(UserRole userrole)
         {
             return userroleRepository.Add(userrole);

@@ -10,6 +10,7 @@ namespace FOODEE.Interface
     {
         public UserRole Add(UserRole userrole);
         public UserRole FindById(int id);
+        public List<UserRole> FindUserRoles(int userId);
         public void Delete(int id);
         public UserRole Update(UserRole userrole);
         public List<UserRole> GetAll();

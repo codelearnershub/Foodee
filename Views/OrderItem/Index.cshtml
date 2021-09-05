@@ -1,0 +1,35 @@
+﻿@model IEnumerable<FOODEE.Models.OrderItem>
+@{
+    ViewData["Title"] = "Index"; }
+
+<p>
+    <a asp-action="Add">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>OrderId</th>
+            <th>OrderItemId</th>
+            <th>MenuItemId</th>
+            <th>Quantity</th>
+            <th>UnitPrice</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var order in Model)
+        {
+            <tr>
+                <td>@order.Id</td>
+                <td>@order.OrderId</td>
+                <td>@order.MenuItem</td>
+                <td>@order.Quantity</td>
+                <td>@order.UnitPrice</td>
+                <td>
+                    <a class="btn btn-success" asp-action="Update" asp-route-id="@order.Id">Update </a>
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@order.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>}

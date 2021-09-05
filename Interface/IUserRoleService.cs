@@ -12,6 +12,7 @@ namespace FOODEE.Interface
         public UserRole Update(UserRole userrole);
         public void Delete(int id);
         public List<UserRole> GetAll();
+        public  List<UserRole> FindUserRoles(int userId);
         public bool Exists(int id);
         public UserRole FindById(int id);
     }

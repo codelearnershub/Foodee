@@ -1,4 +1,5 @@
-﻿using FOODEE.Interface;
+﻿using FOODEE.DTO;
+using FOODEE.Interface;
 using FOODEE.Models;
 using FOODEE.Models.ViewModel;
 using Microsoft.AspNetCore.Authentication;
@@ -15,10 +16,16 @@ namespace FOODEE.Controllers
     public class UserController : Controller
     {
         public IUserService _userService;
+        public IUserRoleService _userRoleService;
+        public IRoleService _roleService;
 
-        public UserController(IUserService userService)
+        public UserController(IUserService userService, IUserRoleService userRoleService, IRoleService roleService)
         {
             _userService = userService;
+
+            _userRoleService = userRoleService;
+
+            _roleService = roleService;
         }
         public IActionResult Index()
         {
@@ -34,8 +41,19 @@ namespace FOODEE.Controllers
         [HttpPost]
         public IActionResult Register(CreateUserViewModel model)
         {
+            var userDto = new CreateUserDto
+            {
+                Id = model.Id,
+                LastName = model.LastName,
+                FirstName = model.FirstName,
+                PhoneNumber = model.PhoneNumber,
+                Email = model.Email,
+                Address = model.Address,
+                Gender = model.Gender,
+                Password = model.Password
+            };
 
-            _userService.RegisterUser(model.Id, model.FirstName, model.LastName, model.Address, model.PhoneNumber, model.Email, model.Gender,model.Password);
+            _userService.RegisterUser(userDto);
             return View();
         }
         [HttpGet]
@@ -45,9 +63,15 @@ namespace FOODEE.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(LoginViewModel vm, string FirstName, string LastName, string password, bool isMenu = false)
+        public async Task<IActionResult> Login(LoginViewModel vm, bool isMenu = false)
         {
-            var user = _userService.LoginUser(vm.Email, vm.Password);
+            User user = _userService.LoginUser(vm.Email, vm.Password);
+
+            if (user == null) return View();
+
+            var roles = _userRoleService.FindUserRoles(user.Id);
+
+            var role = roles[0].Name;
 
             if (user == null)
             {
@@ -56,10 +80,9 @@ namespace FOODEE.Controllers
                 {
                     return RedirectToAction("Menu", "Order");
                 }
-                return View();
 
             }
-            else
+            else if (role == "SuperAdmin")
             {
                var claims = new List<Claim>
                {
@@ -67,14 +90,47 @@ namespace FOODEE.Controllers
                  new Claim(ClaimTypes.GivenName, $"{user.FirstName} {user.LastName}"),
                  new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                  new Claim(ClaimTypes.Email, user.Email),
-                 new Claim(ClaimTypes.Role, "User"),
+                 new Claim(ClaimTypes.Role, "SuperAdmin"),
                };
                 var claimsIdentity = new ClaimsIdentity(claims,CookieAuthenticationDefaults.AuthenticationScheme);
                 var props = new AuthenticationProperties();
                 var principal = new ClaimsPrincipal(claimsIdentity);
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal,props);
+                return isMenu ? RedirectToAction("Menu", "Order") : RedirectToAction("Index", "SuperAdmin");
+            }
+            else if (role == "Admin")
+            {
+                var claims = new List<Claim>
+               {
+                 new Claim(ClaimTypes.Name, $"{user.FirstName}"),
+                 new Claim(ClaimTypes.GivenName, $"{user.FirstName} {user.LastName}"),
+                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                 new Claim(ClaimTypes.Email, user.Email),
+                 new Claim(ClaimTypes.Role, "Admin"),
+               };
+                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                var props = new AuthenticationProperties();
+                var principal = new ClaimsPrincipal(claimsIdentity);
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, props);
+                return isMenu ? RedirectToAction("Menu", "Order") : RedirectToAction("Index", "Admin");
+            }
+            else if (role == "Customer")
+            {
+                var claims = new List<Claim>
+               {
+                 new Claim(ClaimTypes.Name, $"{user.FirstName}"),
+                 new Claim(ClaimTypes.GivenName, $"{user.FirstName} {user.LastName}"),
+                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                 new Claim(ClaimTypes.Email, user.Email),
+                 new Claim(ClaimTypes.Role, "Customer"),
+               };
+                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                var props = new AuthenticationProperties();
+                var principal = new ClaimsPrincipal(claimsIdentity);
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, props);
                 return isMenu ? RedirectToAction("Menu", "Order") : RedirectToAction("Index", "Home");
             }
+            return View();
         }
         public async Task<IActionResult> Logout()
         {

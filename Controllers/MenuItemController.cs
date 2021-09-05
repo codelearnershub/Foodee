@@ -1,5 +1,7 @@
-﻿using FOODEE.Interface;
+﻿using FOODEE.DTO;
+using FOODEE.Interface;
 using FOODEE.Models;
+using FOODEE.Models.ViewModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -65,27 +67,32 @@ namespace FOODEE.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Add(MenuItem menuitem, IFormFile file)
+        public IActionResult Add(MenuItemVM menuitemVm)
         {
+            var menuItemDto = new MenuItemDto();
             if (ModelState.IsValid)
             {
-                if (file != null)
+                if (menuitemVm.Image.FileName != null)
                 {
+                    var file = menuitemVm.Image;
                     string imageDirectory = Path.Combine(_webHostEnvironment.WebRootPath, "Image");
                     Directory.CreateDirectory(imageDirectory);
                     string contentType = file.ContentType.Split('/')[1];
                     string fileName = $"{Guid.NewGuid()}.{contentType}";
                     string fullPath = Path.Combine(imageDirectory, fileName);
+                    menuItemDto.Image = fileName;
                     using (var fileStream = new FileStream(fullPath, FileMode.Create))
                     {
                         file.CopyTo(fileStream);
                     }
-                    menuitem.Image = fileName;
                 }
-                _menuitemService.Add(menuitem);
-                return RedirectToAction(nameof(Index));
             }
-            return View(menuitem);
+            menuItemDto.Name = menuitemVm.Name;
+            menuItemDto.Price = menuitemVm.Price;
+            menuItemDto.Description = menuitemVm.Description;
+            menuItemDto.Menus = menuitemVm.Menus; 
+            _menuitemService.Add(menuItemDto);
+            return View(menuitemVm);
         }
 
         [HttpGet]
@@ -108,7 +115,7 @@ namespace FOODEE.Controllers
                 SelectListItem menuitemList = new SelectListItem(menu.Name, menu.Id.ToString());
                 listAMenuItems.Add(menuitemList);
             }
-            ViewBag.Categories = listAMenuItems;
+            ViewBag.Menus = listAMenuItems;
             return View(menuitem);
         }
 

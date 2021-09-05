@@ -1,4 +1,5 @@
-﻿using FOODEE.Models;
+﻿using FOODEE.DTO;
+using FOODEE.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +10,7 @@ namespace FOODEE.Interface
     public interface IUserService
     {
         public User LoginUser(string email, string password);
-        public void RegisterUser(int id, string firstName, string lastName, string address, long phoneNumber, string Email, string gender, string password);
 
-
+        public void RegisterUser(CreateUserDto createUserDto);
     }
 }

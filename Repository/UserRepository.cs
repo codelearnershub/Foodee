@@ -47,7 +47,7 @@ namespace FOODEE.Repository
         }
         public List<UserRole> FindUserRoles(int userId)
         {
-            return _dbContext.UserRoles.Where(ur => ur.userId == userId).ToList();
+            return _dbContext.UserRoles.Where(ur => ur.UserId == userId).ToList();
         }
 
         public User FindUserById(int id)

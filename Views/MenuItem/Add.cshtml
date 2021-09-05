@@ -1,58 +1,55 @@
 ﻿@model FOODEE.Models.MenuItem
+@{
+    Layout = "_Layout";
+}
 
 @{
     ViewData["Title"] = "Create";
 }
-<h1>Create MenuItem</h1>
-<div class="container">
-    <div class="row">
-        <div class="col-md-4">
-            <form asp-action="Create" enctype="multipart/form-data">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="Id" class="control-label"></label>
-                    <select class="form-control" name="CategoryId" asp-items="@ViewBag.Menus"></select>
-                    <span asp-validation-for="Id" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Name" class="control-label"></label>
-                    <input asp-for="Name" class="form-control" />
-                    <span asp-validation-for="Name" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Price" class="control-label"></label>
-                    <input asp-for="Price" class="form-control" />
-                    <span asp-validation-for="Price" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Image" class="control-label"></label>
-                    <input asp-for="Image" class="form-control" />
-                    <span asp-validation-for="Image" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Select Image</label>
-                    <input name="file" type="file" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <label asp-for="Description" class="control-label"></label>
-                    <input asp-for="Description" class="form-control" />
-                    <span asp-validation-for="Description" class="text-danger"></span>
-                </div>
+<div class="row justify-content-center">
+    <div class="card">
+
+        <div class="card-header">
+            <h1 class="text-center">Create Products</h1>
+        </div>
+
+        <div class="card-body">
+
+            <form method="post">
 
                 <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-primary" />
+                    <label asp-for="MenuId" class="control-label" placeholder="Pick A Menu"></label>
+                    <select asp-for="MenuId" class="form-control" name="MenuId" asp-items="@ViewBag.Menus" required>
+                        <option selected>--Select Menu--</option>
+                    </select><br>
+
+                    <input asp-for="Name" class="form-control" placeholder="Enter Name"/>
+                    <span asp-validation-for="Name" class="text-danger"></span><br>
+
+                    <input asp-for="Price" class="form-control" placeholder="Fix a price" />
+                    <span asp-validation-for="Price" class="text-danger"></span><br>
+
+                    <label class="control-label">Select Image</label>
+                    <input asp-for="Image" name="file" type="file" class="form-control" /><br>
+
+                    <input asp-for="Description" class="form-control" placeholder="Item Description"/>
+                    <span asp-validation-for="Description" class="text-danger"></span><br>
                 </div>
+                <div class="form-group">
+                    <input type="submit" value="Add" class="btn btn-outline-success" />
+                </div>
+
             </form>
+
         </div>
     </div>
 </div>
-
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}>
+}
 
 

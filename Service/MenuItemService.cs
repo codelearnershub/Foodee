@@ -1,4 +1,5 @@
-﻿using FOODEE.Interface;
+﻿using FOODEE.DTO;
+using FOODEE.Interface;
 using FOODEE.Models;
 using System;
 using System.Collections.Generic;
@@ -21,8 +22,28 @@ namespace FOODEE.Service
             return menuitemRepository.FindById(id);
         }
 
-        public MenuItem Add(MenuItem menuitem)
+        public MenuItem Add(MenuItemDto menuitemDto)
         {
+
+            var menuitem = new MenuItem
+            {
+                Image = menuitemDto.Image,
+                Price = menuitemDto.Price,
+                Quantity = menuitemDto.Quantity,
+                Description = menuitemDto.Description,
+                Name = menuitemDto.Name,
+            };
+            var menuMenuItems = new List<MenuMenuItem>();
+            foreach (var id in menuitemDto.Menus)
+            {
+                var menuMenuItem = new MenuMenuItem
+                {
+                    MenuId = menuitem.Id,
+                    MenuItemId = int.Parse(id),
+                };
+                menuMenuItems.Add(menuMenuItem);
+            }
+            menuitem.Menus = menuMenuItems;
             return menuitemRepository.Add(menuitem);
         }
 
