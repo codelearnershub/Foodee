@@ -79,19 +79,12 @@ namespace FOODEE.Migrations
 
                     b.Property<string>("Description")
                         .HasColumnType("text");
-<<<<<<< HEAD
 
                     b.Property<int>("DisplayOrder")
                         .HasColumnType("int");
 
                     b.Property<int>("MenuItemId")
                         .HasColumnType("int");
-=======
-                    b.Property<int>("MenuItemId")
-                        .HasColumnType("int");
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("text");
->>>>>>> origin/Views
 
                     b.Property<string>("Name")
                         .HasColumnType("text");
@@ -174,16 +167,7 @@ namespace FOODEE.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime");
 
-<<<<<<< HEAD
                     b.Property<DateTime?>("DateLastModified")
-=======
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("text");
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("DateLastModified")
->>>>>>> origin/Views
                         .HasColumnType("datetime");
 
                     b.Property<string>("DeliveryAddress")
@@ -229,14 +213,6 @@ namespace FOODEE.Migrations
                     b.Property<int>("MenuItemId")
                         .HasColumnType("int");
 
-<<<<<<< HEAD
-=======
-                    b.Property<int?>("MenuMenuItemId")
-                        .HasColumnType("int");
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("text");
-
->>>>>>> origin/Views
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
 
@@ -267,16 +243,7 @@ namespace FOODEE.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime");
 
-<<<<<<< HEAD
                     b.Property<DateTime?>("DateLastModified")
-=======
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("text");
-
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
-                    b.Property<DateTime>("DateLastModified")
->>>>>>> origin/Views
                         .HasColumnType("datetime");
 
                     b.Property<int>("OrderId")
@@ -382,17 +349,6 @@ namespace FOODEE.Migrations
 
                         .HasColumnType("text");
 
-<<<<<<< HEAD
-=======
-                        .IsRequired()
-                        .HasColumnType("varchar(60)")
-                        .HasMaxLength(60);
-
-
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("text");
-
->>>>>>> origin/Views
                     b.Property<string>("PasswordHash")
                         .HasColumnType("text");
 
@@ -580,15 +536,7 @@ namespace FOODEE.Migrations
 
                     b.HasOne("FOODEE.Models.User", "User")
                         .WithMany("UserRoles")
-<<<<<<< HEAD
                         .HasForeignKey("UserId")
-=======
-
-                    b.HasOne("FOODEE.Models.User", null)
-                        .WithMany("UserRole")
-
-                        .HasForeignKey("userId")
->>>>>>> origin/Views
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
