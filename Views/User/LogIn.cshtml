@@ -9,20 +9,20 @@
 <div class="limiter">
     <div class="container-login100" style="background-image: url('/images/bg-01.jpg');">
         <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
-            <form class="login100-form validate-form">
+            <form class="login100-form validate-form" method="post">
                 <span class="login100-form-title p-b-49">
                     Login
                 </span>
 
                 <div class="wrap-input100 validate-input m-b-23" data-validate="Email is required">
-                    <span class="label-input100">Username</span>
+                    <span class="label-input100">Email</span>
                     <input asp-for="Email" class="input100" type="text" name="Email" placeholder="Type Your Email">
                     <span asp-validation-for="Email" class="focus-input100" data-symbol="&#xf206;"></span>
                 </div>
                 <div class="wrap-input100 validate-input" data-validate="Password is required">
                     <span class="label-input100">Password</span>
-                    <input asp-for="Password" class="input100" type="password" name="pass" placeholder="Type your password">
-                    <span asp-validation-for="Password" class="focus-input100" data-symbol="&#xf190;"></span>
+                    <input asp-for="Password" class="input100" type="Password" name="Password" placeholder="Type Your Password">
+                    <span asp-validation-for="Password" class="focus-input100" data-symbol="&#xf206;"></span>
                 </div>
                 <div class="container-login100-form-btn">
                     <div class="wrap-login100-form-btn">

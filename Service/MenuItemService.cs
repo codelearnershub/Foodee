@@ -38,8 +38,8 @@ namespace FOODEE.Service
             {
                 var menuMenuItem = new MenuMenuItem
                 {
-                    MenuId = menuitem.Id,
-                    MenuItemId = int.Parse(id),
+                    MenuId = int.Parse(id),
+                    MenuItemId = menuitem.Id,
                 };
                 menuMenuItems.Add(menuMenuItem);
             }

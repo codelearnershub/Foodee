@@ -1,10 +1,10 @@
-﻿@model FOODEE.Models.MenuItem
+﻿@model FOODEE.Models.ViewModel.MenuItemVM
 @{
     Layout = "_Layout";
 }
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Add";
 }
 <div class="row justify-content-center">
     <div class="card">
@@ -15,11 +15,11 @@
 
         <div class="card-body">
 
-            <form method="post">
+            <form method="post" asp-action="Add" enctype="multipart/form-data">
 
                 <div class="form-group">
-                    <label asp-for="MenuId" class="control-label" placeholder="Pick A Menu"></label>
-                    <select asp-for="MenuId" class="form-control" name="MenuId" asp-items="@ViewBag.Menus" required>
+                    <label asp-for="Menus" class="control-label" placeholder="Pick A Menu"></label>
+                    <select asp-for="Menus" class="form-control select2-selection--multiple" asp-items="@ViewBag.Menus" multiple required>
                         <option selected>--Select Menu--</option>
                     </select><br>
 
@@ -28,9 +28,9 @@
 
                     <input asp-for="Price" class="form-control" placeholder="Fix a price" />
                     <span asp-validation-for="Price" class="text-danger"></span><br>
-
-                    <label class="control-label">Select Image</label>
-                    <input asp-for="Image" name="file" type="file" class="form-control" /><br>
+                    
+                    <input asp-for="Image" class="form-control" type="file"/>
+                    <span asp-validation-for="Image" class="text-danger"></span><br>
 
                     <input asp-for="Description" class="form-control" placeholder="Item Description"/>
                     <span asp-validation-for="Description" class="text-danger"></span><br>
