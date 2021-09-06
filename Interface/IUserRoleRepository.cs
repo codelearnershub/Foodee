@@ -8,12 +8,20 @@ namespace FOODEE.Interface
 {
     public interface IUserRoleRepository
     {
-        public UserRole Add(UserRole userrole);
-        public UserRole FindById(int id);
-        public List<UserRole> FindUserRoles(int userId);
-        public void Delete(int id);
-        public UserRole Update(UserRole userrole);
-        public List<UserRole> GetAll();
-        public bool Exists(int id);
+        public UserRole Add(UserRole userRole);
+
+        public UserRole FindById(int userRoleId);
+
+        public string FindRole(int userId);
+
+        public UserRole FindUserRole(int userId);
+
+        public List<UserRole> FindUsersWithParticularRole(int roleId);
+
+        public UserRole FindUserWithParticularRole(int roleId);
+
+        public UserRole Update(UserRole userRole);
+
+        public void Delete(int userRoleId);
     }
 }

@@ -9,43 +9,55 @@ namespace FOODEE.Service
 {
     public class UserRoleService: IUserRoleService
     {
-        private readonly IUserRoleRepository userroleRepository;
+        private readonly IUserRoleRepository _userRoleRepository;
 
-        public UserRoleService(IUserRoleRepository userroleRepository)
+        public UserRoleService(IUserRoleRepository userRoleRepository)
         {
-            this.userroleRepository = userroleRepository;
+            _userRoleRepository = userRoleRepository;
         }
+
+        public UserRole Add(int userId, int roleId)
+        {
+            var userRole = new UserRole
+            {
+                CreatedAt = DateTime.Now,
+                UserId = userId,
+                RoleId = roleId,
+            };
+
+            return _userRoleRepository.Add(userRole);
+        }
+
         public UserRole FindById(int id)
         {
-            return userroleRepository.FindById(id);
-        }
-        public List<UserRole> FindUserRoles(int userId)
-        {
-            return userroleRepository.FindUserRoles(userId);
-        }
-        public UserRole Add(UserRole userrole)
-        {
-            return userroleRepository.Add(userrole);
+            return _userRoleRepository.FindById(id);
         }
 
-        public UserRole Update(UserRole userrole)
+        public string FindRole(int userId)
         {
-            return userroleRepository.Update(userrole);
+            return _userRoleRepository.FindRole(userId);
+
+        }
+
+        public UserRole FindUserRole(int userId)
+        {
+            return _userRoleRepository.FindUserRole(userId);
+
         }
 
         public void Delete(int id)
         {
-            userroleRepository.Delete(id);
+            _userRoleRepository.Delete(id);
         }
 
-        public List<UserRole> GetAll()
+        public List<UserRole> FindUsersWithParticularRole(int roleId)
         {
-            return userroleRepository.GetAll();
-
+            return _userRoleRepository.FindUsersWithParticularRole(roleId);
         }
-        public bool Exists(int id)
+
+        public UserRole FindUserWithParticularRole(int roleId)
         {
-            return userroleRepository.Exists(id);
+            return _userRoleRepository.FindUserWithParticularRole(roleId);
         }
     }
 }

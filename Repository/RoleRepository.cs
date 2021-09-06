@@ -21,34 +21,41 @@ namespace FOODEE.Repository
             _dbContext.SaveChanges();
             return role;
         }
-        public void Delete(int id)
+
+        public void Delete(int roleId)
         {
-            var role = FindById(id);
+            var role = FindById(roleId);
+
             if (role != null)
             {
                 _dbContext.Roles.Remove(role);
                 _dbContext.SaveChanges();
             }
         }
-        public Role FindById(int id)
-        {
-            return _dbContext.Roles.Find(id);
-        }
 
-        public Role FindByName(string name)
+        public Role FindById(int roleId)
         {
-            return _dbContext.Roles.FirstOrDefault(r => r.Name == name);
+            return _dbContext.Roles.FirstOrDefault(u => u.Id.Equals(roleId));
+        }
+        public Role FindByName(string roleName)
+        {
+            return _dbContext.Roles.FirstOrDefault(u => u.Name.Equals(roleName));
+        }
+        public List<Role> GetAllRoles()
+        {
+
+            return _dbContext.Roles.Where(r => r.Name != "Super Admin").OrderByDescending(r => r.CreatedAt).ToList();
+        }
+        public List<Role> GetRolesWithoutAdmin()
+        {
+
+            return _dbContext.Roles.Where(r => r.Name != "Admin" && r.Name != "Super Admin").OrderByDescending(r => r.CreatedAt).ToList();
         }
         public Role Update(Role role)
         {
             _dbContext.Roles.Update(role);
             _dbContext.SaveChanges();
             return role;
-        }
-        public List<Role> GetAll()
-        {
-            return _dbContext.Roles.ToList();
-
         }
     }
 }

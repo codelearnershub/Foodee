@@ -12,7 +12,7 @@ namespace FOODEE.Models.ViewModel
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Address { get; set; }
-        public long PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; }
         public string Email { get; set; }
         public string Gender { get; set; }
         public string Password { get; set; }
@@ -20,18 +20,15 @@ namespace FOODEE.Models.ViewModel
 
     public class CreateUserViewModel
     {
-        [Required(ErrorMessage = "Id is required")]
-        [DisplayName("Id")]
-        [StringLength(60)]
-        public int Id { get; set; }
+        public DateTime CreatedAt { get; set; }
 
-        [Required(ErrorMessage = "First Name is required")]
-        [DisplayName("First Name")]
+        [Required(ErrorMessage = "FirstName is required")]
+        [DisplayName("FirstName")]
         [StringLength(60)]
         public string FirstName { get; set; }
 
-        [Required(ErrorMessage = "Last Name is required")]
-        [DisplayName("Last Name")]
+        [Required(ErrorMessage = "LastName is required")]
+        [DisplayName("LastName")]
         [StringLength(60)]
         public string LastName { get; set; }
 
@@ -40,9 +37,8 @@ namespace FOODEE.Models.ViewModel
         public string Address { get; set; }
 
         [Required(ErrorMessage = "Phone Number is required")]
-        [DataType(DataType.PhoneNumber)]
         [StringLength(24)]
-        public long PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; }
 
         [DisplayName("Email Address")]
         [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}",

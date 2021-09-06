@@ -1,6 +1,7 @@
 ﻿using FOODEE.Context;
 using FOODEE.Interface;
 using FOODEE.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,43 +16,56 @@ namespace FOODEE.Repository
         {
             _dbContext = dbContext;
         }
-        public UserRole Add(UserRole userrole)
+        public UserRole Add(UserRole userRole)
         {
-            _dbContext.UserRoles.Add(userrole);
+            _dbContext.UserRoles.Add(userRole);
             _dbContext.SaveChanges();
-            return userrole;
+            return userRole;
         }
-        public UserRole FindById(int id)
+
+        public void Delete(int userRoleId)
         {
-            return _dbContext.UserRoles.Find(id);
-        }
-        public List<UserRole> FindUserRoles(int userId)
-        {
-            return _dbContext.UserRoles.Where(ur => ur.UserId == userId).ToList();
-        }
-        public void Delete(int id)
-        {
-            var userrole = FindById(id);
-            if (userrole != null)
+            var userRole = FindById(userRoleId);
+
+            if (userRole != null)
             {
-                _dbContext.UserRoles.Remove(userrole);
+                _dbContext.UserRoles.Remove(userRole);
                 _dbContext.SaveChanges();
             }
         }
-        public UserRole Update(UserRole userrole)
+
+        public string FindRole(int userId)
         {
-            _dbContext.UserRoles.Update(userrole);
-            _dbContext.SaveChanges();
-            return userrole;
-        }
-        public List<UserRole> GetAll()
-        {
-            return _dbContext.UserRoles.ToList();
+            return _dbContext.UserRoles.Include(r => r.Role).FirstOrDefault(u => u.UserId == userId).Role.Name;
 
         }
-        public bool Exists(int id)
+
+        public UserRole FindUserRole(int userId)
         {
-            return _dbContext.UserRoles.Any(e => e.Id == id);
+            return _dbContext.UserRoles.Include(r => r.Role).FirstOrDefault(u => u.UserId == userId);
+
+        }
+
+        public List<UserRole> FindUsersWithParticularRole(int roleId)
+        {
+            return _dbContext.UserRoles.Where(r => r.RoleId == roleId).ToList();
+        }
+
+        public UserRole FindById(int userRoleId)
+        {
+            return _dbContext.UserRoles.FirstOrDefault(u => u.Id.Equals(userRoleId));
+        }
+
+        public UserRole Update(UserRole userRole)
+        {
+            _dbContext.UserRoles.Update(userRole);
+            _dbContext.SaveChanges();
+            return userRole;
+        }
+
+        public UserRole FindUserWithParticularRole(int roleId)
+        {
+            return _dbContext.UserRoles.FirstOrDefault(r => r.RoleId == roleId);
         }
     }
 }

@@ -8,7 +8,6 @@ namespace FOODEE.Models
     public class UserRole : BaseEntity
     {
         public Role Role { get; set; }
-        public string Name { get; set; }
         public User User { get; set; }
         public int UserId { get; set; }
         public int RoleId { get; set; }

@@ -13,51 +13,59 @@
                 <img class="booking-img" src="~/images/form-img.jpg" alt="Booking Image">
             </div>
             <div class="booking-form">
-                <form id="booking-form">
+                <form id="booking-form" method="post">
                     <h2>Sign Up Here!</h2>
                     <div class="form-group form-input">
-                        <input asp-for="FirstName" class="form-control" type="text" name="name" value="" required />
-                        <label for="name" class="form-label">Your FirstName name</label>
+                        <input asp-for="FirstName" class="form-control" type="text" name="name"  required />
+                        <label for="FirstName" class="form-label">Your FirstName name</label>
                         <span asp-validation-for="FirstName" class="text-danger"></span><br>
                     </div>
+
                     <div class="form-group form-input">
-                        <input asp-for="LastName" class="form-control" type="text" name="name" value="" required />
-                        <label for="name" class="form-label">Your LastName name</label>
+                        <input asp-for="LastName" class="form-control" type="text" name="name" required />
+                        <label for="LastName" class="form-label">Your LastName name</label>
                         <span asp-validation-for="LastName" class="text-danger"></span><br>
                     </div>
+
                     <div class="form-group form-input">
                         <input asp-for="Email" class="form-control" type="text" name="email" value="" required />
-                        <label for="name" class="form-label">Email</label>
+                        <label for="Email" class="form-label">Email</label>
+                        @if (ViewBag.Message == "error")
+                        {
+                            <p style="color:red; " class="font-weight-bolder  mb-2">*A User with this Email already Exist!!</p>
+                        }
                         <span asp-validation-for="Email" class="text-danger"></span><br>
                     </div>
+
                     <div class="form-group form-input">
                         <input type="password" asp-for="Password" class="form-control" value="" required />
-                        <label for="name" class="form-label">Create Password</label>
+                        <label for="Password" class="form-label">Create Password</label>
                         <span asp-validation-for="Password" class="text-danger"></span><br>
                     </div>
+
                     <div class="form-group form-input">
                         <input type="password" asp-for="ConfirmPassword" class="form-control" value="" required />
-                        <label for="name" class="form-label">ConfirmPassword</label>
+                        <label for="ConfirmPassword" class="form-label">ConfirmPassword</label>
                         <span asp-validation-for="ConfirmPassword" class="text-danger"></span><br>
                     </div>
                     <div class="form-group form-input">
-                        <input type="number" asp-for="PhoneNumber" class="form-control" value="" required />
-                        <label for="name" class="form-label">PhoneNumber</label>
+                        <input type="text" asp-for="PhoneNumber" class="form-control" value="" required />
+                        <label for="PhoneNumber" class="form-label">PhoneNumber</label>
                         <span asp-validation-for="PhoneNumber" class="text-danger"></span><br>
                     </div>
                     <div class="form-group form-input">
                         <textarea asp-for="Address" class="form-control" value="" required></textarea>
-                        <label for="name" class="form-label">Address</label>
+                        <label for="Address" class="form-label">Address</label>
                         <span asp-validation-for="Address" class="text-danger"></span><br>
                     </div>
-                    <div class="form-group form-input">
-                        <input asp-for="Gender" type="radio" id="Male" name="gender" value="Male" />
-                        <label for="Male">Male</label>
-
-                        <input asp-for="Gender" type="radio" id="Female" name="gender" value="Female" />
-                        <label for="Female">Female</label>
-
-                        <span asp-validation-for="Gender" class="text-danger"></span>
+                    <div class="form-group col-md-4">
+                        <label class="form-check-label font-weight-bold" asp-for="Gender"><span style="color: darkred">*</span> Select Gender</label>
+                        <select asp-for="Gender" class="form-control">
+                            <option disabled selected>--Select Gender--</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                        <span asp-validation-for="Gender" style="color:darkred"></span><br>
                     </div>
 
                     <div class="form-group">

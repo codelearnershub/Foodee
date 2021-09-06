@@ -54,7 +54,7 @@ namespace FOODEE.Context
                           CreatedAt = DateTime.Now,
                           Gender = "Female",
                           Email = "olowonmiadejoke@gmail.com",
-                          PhoneNumber = 09039513977,
+                          PhoneNumber = "09039513977",
                           Address = "Asero,Abk",
                           PasswordHash = "6prgwCkzdfZ/oANfSVHfdcE7vzXvVhWSA5WXj8AhHxs=",
                           HashSalt = "oRG1o9cidyVnRFgsWQN7AA=="
