@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FOODEE.Models.ViewModel
 {
-    public class MenuItemVM
+    public class MenuItemVM: BaseEntity
     {
         public string Name { get; set; }
         public int Quantity { get; set; }
@@ -14,5 +14,9 @@ namespace FOODEE.Models.ViewModel
         public decimal Price { get; set; }
         public IFormFile Image { get; set; }
         public string[] Menus { get; set; }
+        public ICollection<Menu> Menuss { get; set; } = new HashSet<Menu>();
+        public ICollection<MenuItem> MenuItems { get; set; } = new HashSet<MenuItem>();
+        public ICollection<MenuMenuItem> MenuMenuItems { get; set; } = new HashSet<MenuMenuItem>();
+        public ICollection<OrderItem> OrderItem { get; set; } = new HashSet<OrderItem>();
     }
 }

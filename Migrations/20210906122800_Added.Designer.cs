@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FOODEE.Migrations
 {
     [DbContext(typeof(FoodeeDbContext))]
-    [Migration("20210904133826_Added")]
+    [Migration("20210906122800_Added")]
     partial class Added
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -72,6 +72,9 @@ namespace FOODEE.Migrations
                     b.Property<int>("MenuId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("MenuId1")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
@@ -82,6 +85,8 @@ namespace FOODEE.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("MenuId1");
 
                     b.ToTable("MenuItems");
                 });
@@ -237,19 +242,19 @@ namespace FOODEE.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2021, 9, 4, 14, 38, 22, 880, DateTimeKind.Local).AddTicks(481),
+                            CreatedAt = new DateTime(2021, 9, 6, 13, 27, 55, 920, DateTimeKind.Local).AddTicks(4939),
                             Name = "SuperAdmin"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2021, 9, 4, 14, 38, 22, 880, DateTimeKind.Local).AddTicks(781),
+                            CreatedAt = new DateTime(2021, 9, 6, 13, 27, 55, 920, DateTimeKind.Local).AddTicks(5115),
                             Name = "Admin"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2021, 9, 4, 14, 38, 22, 880, DateTimeKind.Local).AddTicks(795),
+                            CreatedAt = new DateTime(2021, 9, 6, 13, 27, 55, 920, DateTimeKind.Local).AddTicks(5125),
                             Name = "Customer"
                         });
                 });
@@ -303,13 +308,13 @@ namespace FOODEE.Migrations
                         {
                             Id = 1,
                             Address = "Asero,Abk",
-                            CreatedAt = new DateTime(2021, 9, 4, 14, 38, 22, 856, DateTimeKind.Local).AddTicks(6384),
+                            CreatedAt = new DateTime(2021, 9, 6, 13, 27, 55, 902, DateTimeKind.Local).AddTicks(2303),
                             Email = "olowonmiadejoke@gmail.com",
                             FirstName = "Habeebah",
                             Gender = "Female",
                             HashSalt = "oRG1o9cidyVnRFgsWQN7AA==",
                             LastName = "Olowonmi",
-                            PasswordHash = "HH0bJTATP53nCkvQPacCkjlviZs1bb+BpbyrtOhOHgc=",
+                            PasswordHash = "6prgwCkzdfZ/oANfSVHfdcE7vzXvVhWSA5WXj8AhHxs=",
                             PhoneNumber = 9039513977L
                         });
                 });
@@ -347,10 +352,17 @@ namespace FOODEE.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2021, 9, 4, 14, 38, 22, 881, DateTimeKind.Local).AddTicks(9783),
+                            CreatedAt = new DateTime(2021, 9, 6, 13, 27, 55, 924, DateTimeKind.Local).AddTicks(6890),
                             RoleId = 1,
                             UserId = 1
                         });
+                });
+
+            modelBuilder.Entity("FOODEE.Models.MenuItem", b =>
+                {
+                    b.HasOne("FOODEE.Models.Menu", "Menu")
+                        .WithMany()
+                        .HasForeignKey("MenuId1");
                 });
 
             modelBuilder.Entity("FOODEE.Models.MenuMenuItem", b =>

@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +30,10 @@ namespace FOODEE
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
+            services.AddControllersWithViews()
+                .AddNewtonsoftJson()
+                .AddXmlDataContractSerializerFormatters();
             services.AddDbContext<FoodeeDbContext>(options =>
             options.UseMySQL(Configuration.GetConnectionString("FoodeeDbContext")));
             services.AddScoped<IUserRepository, UserRepository>();
@@ -63,8 +68,6 @@ namespace FOODEE
 
             });
             services.AddControllersWithViews();
-            services.AddControllersWithViews();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

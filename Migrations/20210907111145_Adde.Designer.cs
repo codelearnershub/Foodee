@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FOODEE.Migrations
 {
     [DbContext(typeof(FoodeeDbContext))]
-    [Migration("20210904121735_Add")]
-    partial class Add
+    [Migration("20210907111145_Adde")]
+    partial class Adde
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -72,6 +72,9 @@ namespace FOODEE.Migrations
                     b.Property<int>("MenuId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("MenuId1")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
@@ -82,6 +85,8 @@ namespace FOODEE.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("MenuId1");
 
                     b.ToTable("MenuItems");
                 });
@@ -232,6 +237,26 @@ namespace FOODEE.Migrations
                         .IsUnique();
 
                     b.ToTable("Roles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(2021, 9, 7, 12, 11, 42, 501, DateTimeKind.Local).AddTicks(7321),
+                            Name = "SuperAdmin"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedAt = new DateTime(2021, 9, 7, 12, 11, 42, 501, DateTimeKind.Local).AddTicks(7509),
+                            Name = "Admin"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedAt = new DateTime(2021, 9, 7, 12, 11, 42, 501, DateTimeKind.Local).AddTicks(7521),
+                            Name = "Customer"
+                        });
                 });
 
             modelBuilder.Entity("FOODEE.Models.User", b =>
@@ -268,8 +293,8 @@ namespace FOODEE.Migrations
                     b.Property<string>("PasswordHash")
                         .HasColumnType("text");
 
-                    b.Property<long>("PhoneNumber")
-                        .HasColumnType("bigint");
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -277,6 +302,21 @@ namespace FOODEE.Migrations
                         .IsUnique();
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Address = "Asero,Abk",
+                            CreatedAt = new DateTime(2021, 9, 7, 12, 11, 42, 484, DateTimeKind.Local).AddTicks(282),
+                            Email = "olowonmiadejoke@gmail.com",
+                            FirstName = "Habeebah",
+                            Gender = "Female",
+                            HashSalt = "oRG1o9cidyVnRFgsWQN7AA==",
+                            LastName = "Olowonmi",
+                            PasswordHash = "6prgwCkzdfZ/oANfSVHfdcE7vzXvVhWSA5WXj8AhHxs=",
+                            PhoneNumber = "09039513977"
+                        });
                 });
 
             modelBuilder.Entity("FOODEE.Models.UserRole", b =>
@@ -291,9 +331,6 @@ namespace FOODEE.Migrations
                     b.Property<DateTime?>("DateLastModified")
                         .HasColumnType("datetime");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
-
                     b.Property<int>("RoleId")
                         .HasColumnType("int");
 
@@ -307,6 +344,22 @@ namespace FOODEE.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("UserRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(2021, 9, 7, 12, 11, 42, 502, DateTimeKind.Local).AddTicks(7477),
+                            RoleId = 1,
+                            UserId = 1
+                        });
+                });
+
+            modelBuilder.Entity("FOODEE.Models.MenuItem", b =>
+                {
+                    b.HasOne("FOODEE.Models.Menu", "Menu")
+                        .WithMany()
+                        .HasForeignKey("MenuId1");
                 });
 
             modelBuilder.Entity("FOODEE.Models.MenuMenuItem", b =>

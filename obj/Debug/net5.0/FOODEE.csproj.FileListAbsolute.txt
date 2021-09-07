@@ -66,7 +66,6 @@ C:\Users\ADMIN\source\repos\FOODEE\obj\Debug\net5.0\Razor\Views\User\LogIn.cshtm
 C:\Users\ADMIN\source\repos\FOODEE\obj\Debug\net5.0\Razor\Views\User\Register.cshtml.g.cs
 C:\Users\ADMIN\source\repos\FOODEE\obj\Debug\net5.0\Razor\Views\Menu\Add.cshtml.g.cs
 C:\Users\ADMIN\source\repos\FOODEE\obj\Debug\net5.0\Razor\Views\Menu\Index.cshtml.g.cs
-C:\Users\ADMIN\source\repos\FOODEE\obj\Debug\net5.0\Razor\Views\Super Admin\Index.cshtml.g.cs
 C:\Users\ADMIN\source\repos\FOODEE\obj\Debug\net5.0\Razor\Views\Shared\_DashboardLayout.cshtml.g.cs
 C:\Users\ADMIN\source\repos\FOODEE\obj\Debug\net5.0\Razor\Views\Order\Add.cshtml.g.cs
 C:\Users\ADMIN\source\repos\FOODEE\obj\Debug\net5.0\Razor\Views\Order\CheckOut.cshtml.g.cs
@@ -79,3 +78,10 @@ C:\Users\ADMIN\source\repos\FOODEE\obj\Debug\net5.0\Razor\Views\OrderItem\Index.
 C:\Users\ADMIN\source\repos\FOODEE\obj\Debug\net5.0\Razor\Views\OrderItem\Add.cshtml.g.cs
 C:\Users\ADMIN\source\repos\FOODEE\obj\Debug\net5.0\Razor\Views\OrderItem\Detail.cshtml.g.cs
 C:\Users\ADMIN\source\repos\FOODEE\obj\Debug\net5.0\Razor\Views\Admin\Index.cshtml.g.cs
+C:\Users\ADMIN\source\repos\FOODEE\bin\Debug\net5.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\ADMIN\source\repos\FOODEE\bin\Debug\net5.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\ADMIN\source\repos\FOODEE\bin\Debug\net5.0\Microsoft.DotNet.PlatformAbstractions.dll
+C:\Users\ADMIN\source\repos\FOODEE\bin\Debug\net5.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\ADMIN\source\repos\FOODEE\bin\Debug\net5.0\Newtonsoft.Json.dll
+C:\Users\ADMIN\source\repos\FOODEE\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll
+C:\Users\ADMIN\source\repos\FOODEE\obj\Debug\net5.0\Razor\Views\SuperAdmin\Index.cshtml.g.cs

@@ -1,0 +1,125 @@
+﻿<h6>I AM THE SUPER ADMIN</h6>
+
+@model FOODEE.Models.ViewModel.MenuItemVM
+@{ ViewData["Title"] = "Home Page"; }
+<h6>FOODEE HOMIE</h6>
+<div class="container">
+    <div class="text-center">
+        <button class="btn btn-dark filter-button" data-filter="all">All</button>
+        @foreach (var menu in Model.Menuss)
+        {
+            <button class="btn btn-outline-secondary filter-button" data-filter="@menu.Name.Replace(' ','_')">
+                @menu.Name
+            </button>
+        }
+    </div>
+    <br />
+    <div class="row">
+        @foreach (var prod in Model.MenuItems)
+        {
+            <partial name="IndividualProductCard" model="prod" />
+            //display all product
+        }
+    </div>
+</div>
+<div class="container">
+    <div class="row text-center">
+        @foreach (var item in Model.MenuItems)
+        {
+            <div class="col-sm-3 active img-responsive   mb-2">
+                <a asp-action="Details" asp-controller="MenuItem" asp-route-id="@item.Id" title="FOODEE" data-toggle="popover" data-trigger="hover" data-content="Click add to cart to enjoy our products">
+                    <img src="~/Image/@item.Image" class="img-responsive zoom" style="width:100%" alt="Image">
+                </a>
+                <p class="mb-0">@item.Name</p>
+                <p>&#8358 @item.Price </p>
+
+                <button type="submit" onclick="addToCart(this)" id="item-@item.Id" data-name="@item.Name" data-price="@item.Price" data-id="@item.Id" class="btn btn-sm btn-outline-success font-weight-bold" style="width:70%"><span class="spinner-grow spinner-grow-sm"></span><small>ADD TO CART</small></button>
+            </div>
+        }
+
+    </div>
+
+</div>
+<div id="cart-modal" class="modal fade align-content-center" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered ">
+        <div class="modal-content">
+            <div class="container bg-light">
+                <div class="row justify-content-center">
+                    <div>
+                        <h5 class="text-dark">FOODEE CART </h5>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-header ">
+
+                <h5 class="modal-title text-success" id="item-name"> </h5>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            &#8358 <h5 id="item-price" class="text-dark font-weight-light"></h5>
+                        </div>
+                        <div class="col-sm-4">
+                            <input id="quantity" class="form-control col-sm-12" min="1" type="number" placeholder="Quantity" />
+                        </div>
+                        <div class="col-sm-4">
+                            &#8358 <h5 id="item-total" class="text-primary font-weight-light"></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="modal-footer bg-light">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                <button href="#myModal" type="button" id="save" class="btn btn-success trigger-btn" data-toggle="modal">Add to Cart</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div id="myModal" class="modal fade">
+    <div class="modal-dialog modal-confirm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="icon-box">
+                    <i class="fas fa-fw fa-shopping-basket">&#xE876;</i>
+                </div>
+                <h4 class="modal-title w-100">Awesome!</h4>
+            </div>
+            <div class="modal-body">
+                <p class="text-center">Item added succesfully. Check your Cart for details.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success btn-block" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+
+            $(".filter-button").click(function () {
+
+                var value = $(this).attr('data-filter');
+                if (value == "all") {
+                    $('.filter').show('1000');
+                }
+                else {
+                    $(".filter").not('.' + value).hide('3000');
+                    $('.filter').filter('.' + value).show('3000');
+
+                }
+            });
+
+        });
+    </script>
+}
+

@@ -11,57 +11,49 @@ namespace FOODEE.Repository
     public class UserRepository: IUserRepository
     {
         private readonly FoodeeDbContext _dbContext;
+
         public UserRepository(FoodeeDbContext dbContext)
         {
             _dbContext = dbContext;
         }
+
         public User Add(User user)
         {
             _dbContext.Users.Add(user);
             _dbContext.SaveChanges();
             return user;
         }
-        public User FindById(int id)
-        {
-            return _dbContext.Users.Find(id);
-        }
 
-        public void Delete(int id)
+        public void Delete(int userId)
         {
-            var user = FindById(id);
+            var user = FindById(userId);
+
             if (user != null)
             {
                 _dbContext.Users.Remove(user);
                 _dbContext.SaveChanges();
             }
         }
+
+        public User FindById(int userId)
+        {
+            return _dbContext.Users.FirstOrDefault(u => u.Id.Equals(userId));
+        }
+        public List<User> GetAllUser(int userId)
+        {
+            return _dbContext.Users.Where(u => u.Id != 1 && u.Id != userId).OrderByDescending(r => r.CreatedAt).ToList();
+        }
+
+        public User FindByEmail(string userEmail)
+        {
+            return _dbContext.Users.FirstOrDefault(u => u.Email.Equals(userEmail));
+        }
+
         public User Update(User user)
         {
             _dbContext.Users.Update(user);
             _dbContext.SaveChanges();
             return user;
-        }
-        public User FindByEmail(string email)
-        {
-            return _dbContext.Users.FirstOrDefault(c => c.Email == email);
-        }
-        public List<UserRole> FindUserRoles(int userId)
-        {
-            return _dbContext.UserRoles.Where(ur => ur.UserId == userId).ToList();
-        }
-
-        public User FindUserById(int id)
-        {
-            return _dbContext.Users.FirstOrDefault(u => u.Id.Equals(id));
-        }
-        public List<User> GetAll()
-        {
-            return _dbContext.Users.ToList();
-
-        }
-        public bool Exists(int id)
-        {
-            return _dbContext.Users.Any(e => e.Id == id);
         }
     }
 }

@@ -9,10 +9,17 @@ namespace FOODEE.Interface
     public interface IRoleRepository
     {
         public Role Add(Role role);
-        public void Delete(int id);
-        public Role FindById(int id);
+
+        public Role FindById(int roleId);
+
         public Role Update(Role role);
-        public Role FindByName(string name);
-        public List<Role> GetAll();
+
+        public Role FindByName(string roleName);
+
+        public List<Role> GetAllRoles();
+
+        public List<Role> GetRolesWithoutAdmin();
+
+        public void Delete(int roleId);
     }
 }

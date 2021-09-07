@@ -17,54 +17,6 @@ namespace FOODEE.Migrations
                 .HasAnnotation("ProductVersion", "3.1.12")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("FOODEE.Models.Customer", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("varchar(70)")
-                        .HasMaxLength(70);
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("DateLastModified")
-                        .HasColumnType("datetime");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("text");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("varchar(60)")
-                        .HasMaxLength(60);
-
-                    b.Property<string>("Gender")
-                        .HasColumnType("text");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("varchar(60)")
-                        .HasMaxLength(60);
-
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("text");
-
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasColumnType("varchar(24)")
-                        .HasMaxLength(24);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Customers");
-                });
             modelBuilder.Entity("FOODEE.Models.Menu", b =>
                 {
                     b.Property<int>("Id")
@@ -79,22 +31,16 @@ namespace FOODEE.Migrations
 
                     b.Property<string>("Description")
                         .HasColumnType("text");
-<<<<<<< HEAD
 
                     b.Property<int>("DisplayOrder")
                         .HasColumnType("int");
 
                     b.Property<int>("MenuItemId")
                         .HasColumnType("int");
-=======
-                    b.Property<int>("MenuItemId")
-                        .HasColumnType("int");
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("text");
->>>>>>> origin/Views
 
                     b.Property<string>("Name")
                         .HasColumnType("text");
+
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
@@ -124,6 +70,9 @@ namespace FOODEE.Migrations
                     b.Property<int>("MenuId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("MenuId1")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
@@ -134,7 +83,9 @@ namespace FOODEE.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-                    b.HasIndex("MenuId");
+
+                    b.HasIndex("MenuId1");
+
                     b.ToTable("MenuItems");
                 });
 
@@ -174,16 +125,7 @@ namespace FOODEE.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime");
 
-<<<<<<< HEAD
                     b.Property<DateTime?>("DateLastModified")
-=======
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("text");
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("DateLastModified")
->>>>>>> origin/Views
                         .HasColumnType("datetime");
 
                     b.Property<string>("DeliveryAddress")
@@ -204,9 +146,6 @@ namespace FOODEE.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("userId");
-                    b.HasKey("Id");
-
-                    b.HasIndex("CustomerId");
 
                     b.ToTable("Orders");
                 });
@@ -229,14 +168,6 @@ namespace FOODEE.Migrations
                     b.Property<int>("MenuItemId")
                         .HasColumnType("int");
 
-<<<<<<< HEAD
-=======
-                    b.Property<int?>("MenuMenuItemId")
-                        .HasColumnType("int");
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("text");
-
->>>>>>> origin/Views
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
 
@@ -249,7 +180,7 @@ namespace FOODEE.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("MenuItemId");
-                    b.HasIndex("MenuMenuItemId");
+
                     b.HasIndex("OrderId");
 
                     b.HasIndex("MenuId", "OrderId")
@@ -267,16 +198,7 @@ namespace FOODEE.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime");
 
-<<<<<<< HEAD
                     b.Property<DateTime?>("DateLastModified")
-=======
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("text");
-
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
-                    b.Property<DateTime>("DateLastModified")
->>>>>>> origin/Views
                         .HasColumnType("datetime");
 
                     b.Property<int>("OrderId")
@@ -286,8 +208,6 @@ namespace FOODEE.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CustomerId");
 
                     b.HasIndex("UserId");
 
@@ -320,22 +240,21 @@ namespace FOODEE.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2021, 9, 4, 14, 38, 22, 880, DateTimeKind.Local).AddTicks(481),
+                            CreatedAt = new DateTime(2021, 9, 7, 12, 11, 42, 501, DateTimeKind.Local).AddTicks(7321),
                             Name = "SuperAdmin"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2021, 9, 4, 14, 38, 22, 880, DateTimeKind.Local).AddTicks(781),
+                            CreatedAt = new DateTime(2021, 9, 7, 12, 11, 42, 501, DateTimeKind.Local).AddTicks(7509),
                             Name = "Admin"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2021, 9, 4, 14, 38, 22, 880, DateTimeKind.Local).AddTicks(795),
+                            CreatedAt = new DateTime(2021, 9, 7, 12, 11, 42, 501, DateTimeKind.Local).AddTicks(7521),
                             Name = "Customer"
                         });
-                    b.ToTable("Roles");
                 });
 
             modelBuilder.Entity("FOODEE.Models.User", b =>
@@ -346,9 +265,6 @@ namespace FOODEE.Migrations
 
                     b.Property<string>("Address")
                         .HasColumnType("text");
-                        .IsRequired()
-                        .HasColumnType("varchar(70)")
-                        .HasMaxLength(70);
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime");
@@ -357,20 +273,11 @@ namespace FOODEE.Migrations
                         .HasColumnType("datetime");
 
                     b.Property<string>("Email")
-
                         .IsRequired()
                         .HasColumnType("varchar(767)");
 
                     b.Property<string>("FirstName")
                         .HasColumnType("text");
-
-                        .HasColumnType("text");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("varchar(60)")
-                        .HasMaxLength(60);
-
 
                     b.Property<string>("Gender")
                         .HasColumnType("text");
@@ -379,26 +286,13 @@ namespace FOODEE.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("LastName")
-
                         .HasColumnType("text");
 
-<<<<<<< HEAD
-=======
-                        .IsRequired()
-                        .HasColumnType("varchar(60)")
-                        .HasMaxLength(60);
-
-
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("text");
-
->>>>>>> origin/Views
                     b.Property<string>("PasswordHash")
                         .HasColumnType("text");
 
-
-                    b.Property<long>("PhoneNumber")
-                        .HasColumnType("bigint");
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -412,25 +306,15 @@ namespace FOODEE.Migrations
                         {
                             Id = 1,
                             Address = "Asero,Abk",
-                            CreatedAt = new DateTime(2021, 9, 4, 14, 38, 22, 856, DateTimeKind.Local).AddTicks(6384),
+                            CreatedAt = new DateTime(2021, 9, 7, 12, 11, 42, 484, DateTimeKind.Local).AddTicks(282),
                             Email = "olowonmiadejoke@gmail.com",
                             FirstName = "Habeebah",
                             Gender = "Female",
                             HashSalt = "oRG1o9cidyVnRFgsWQN7AA==",
                             LastName = "Olowonmi",
-                            PasswordHash = "HH0bJTATP53nCkvQPacCkjlviZs1bb+BpbyrtOhOHgc=",
-                            PhoneNumber = 9039513977L
+                            PasswordHash = "6prgwCkzdfZ/oANfSVHfdcE7vzXvVhWSA5WXj8AhHxs=",
+                            PhoneNumber = "09039513977"
                         });
-
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasColumnType("varchar(24)")
-                        .HasMaxLength(24);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Users");
-
                 });
 
             modelBuilder.Entity("FOODEE.Models.UserRole", b =>
@@ -444,9 +328,6 @@ namespace FOODEE.Migrations
 
                     b.Property<DateTime?>("DateLastModified")
                         .HasColumnType("datetime");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
 
                     b.Property<int>("RoleId")
                         .HasColumnType("int");
@@ -462,15 +343,21 @@ namespace FOODEE.Migrations
 
                     b.ToTable("UserRoles");
 
-
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2021, 9, 4, 14, 38, 22, 881, DateTimeKind.Local).AddTicks(9783),
+                            CreatedAt = new DateTime(2021, 9, 7, 12, 11, 42, 502, DateTimeKind.Local).AddTicks(7477),
                             RoleId = 1,
                             UserId = 1
                         });
+                });
+
+            modelBuilder.Entity("FOODEE.Models.MenuItem", b =>
+                {
+                    b.HasOne("FOODEE.Models.Menu", "Menu")
+                        .WithMany()
+                        .HasForeignKey("MenuId1");
                 });
 
             modelBuilder.Entity("FOODEE.Models.MenuMenuItem", b =>
@@ -485,63 +372,28 @@ namespace FOODEE.Migrations
                         .WithMany("Menus")
                         .HasForeignKey("MenuItemId")
                         .OnDelete(DeleteBehavior.Restrict)
-
-                });
-
-            modelBuilder.Entity("FOODEE.Models.MenuItem", b =>
-                {
-                    b.HasOne("FOODEE.Models.Menu", "Menu")
-                        .WithMany("MenuItem")
-                        .HasForeignKey("MenuId")
-                        .OnDelete(DeleteBehavior.Cascade)
-
                         .IsRequired();
                 });
 
             modelBuilder.Entity("FOODEE.Models.Order", b =>
                 {
-
                     b.HasOne("FOODEE.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("userId")
-
-                    b.HasOne("FOODEE.Models.Customer", "Customer")
-                        .WithMany("Order")
-                        .HasForeignKey("CustomerId")
-
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
             modelBuilder.Entity("FOODEE.Models.OrderItem", b =>
                 {
-
                     b.HasOne("FOODEE.Models.MenuItem", "MenuItem")
-
-                    b.HasOne("FOODEE.Models.Menu", "Menu")
-                        .WithMany()
-                        .HasForeignKey("MenuId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("FOODEE.Models.MenuItem", null)
-
                         .WithMany("OrderItem")
                         .HasForeignKey("MenuItemId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-
                     b.HasOne("FOODEE.Models.Order", "Order")
                         .WithMany("OrderItems")
-
-                    b.HasOne("FOODEE.Models.MenuMenuItem", "MenuMenuItem")
-                        .WithMany()
-                        .HasForeignKey("MenuMenuItemId");
-
-                    b.HasOne("FOODEE.Models.Order", "Order")
-                        .WithMany("OrderItem")
-
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -549,15 +401,6 @@ namespace FOODEE.Migrations
 
             modelBuilder.Entity("FOODEE.Models.Payment", b =>
                 {
-
-
-                    b.HasOne("FOODEE.Models.Customer", "Customer")
-                        .WithMany()
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-
                     b.HasOne("FOODEE.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
@@ -567,28 +410,15 @@ namespace FOODEE.Migrations
 
             modelBuilder.Entity("FOODEE.Models.UserRole", b =>
                 {
-
                     b.HasOne("FOODEE.Models.Role", "Role")
                         .WithMany("UserRoles")
-
-                    b.HasOne("FOODEE.Models.Role", null)
-                        .WithMany("UserRole")
-
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("FOODEE.Models.User", "User")
                         .WithMany("UserRoles")
-<<<<<<< HEAD
                         .HasForeignKey("UserId")
-=======
-
-                    b.HasOne("FOODEE.Models.User", null)
-                        .WithMany("UserRole")
-
-                        .HasForeignKey("userId")
->>>>>>> origin/Views
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
