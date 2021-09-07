@@ -3,14 +3,16 @@ using System;
 using FOODEE.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FOODEE.Migrations
 {
     [DbContext(typeof(FoodeeDbContext))]
-    partial class FoodeeDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210907111145_Adde")]
+    partial class Adde
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

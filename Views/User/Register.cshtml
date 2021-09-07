@@ -16,14 +16,14 @@
                 <form id="booking-form" method="post">
                     <h2>Sign Up Here!</h2>
                     <div class="form-group form-input">
-                        <input asp-for="FirstName" class="form-control" type="text" name="name"  required />
-                        <label for="FirstName" class="form-label">Your FirstName name</label>
+                        <input type="text" asp-for="FirstName" class="form-control" value="" required />
+                        <label for="FirstName" class="form-label">FirstName</label>
                         <span asp-validation-for="FirstName" class="text-danger"></span><br>
                     </div>
 
                     <div class="form-group form-input">
-                        <input asp-for="LastName" class="form-control" type="text" name="name" required />
-                        <label for="LastName" class="form-label">Your LastName name</label>
+                        <input type="text" asp-for="LastName" class="form-control" value="" required />
+                        <label for="LastName" class="form-label">LastName</label>
                         <span asp-validation-for="LastName" class="text-danger"></span><br>
                     </div>
 

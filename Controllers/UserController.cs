@@ -50,11 +50,12 @@ namespace FOODEE.Controllers
                 Email = model.Email,
                 Address = model.Address,
                 Gender = model.Gender,
-                Password = model.Password
+                Password = model.Password,
+                RoleId = _roleService.FindByName("Customer").Id,
     
             };
             _userService.RegisterUser(createuserDto);
-            return RedirectToAction("Login");
+            return RedirectToAction("User","Login");
         }
         [HttpGet]
         public IActionResult Login()
@@ -111,8 +112,6 @@ namespace FOODEE.Controllers
                     new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                     new Claim(ClaimTypes.Email, user.Email),
                     new Claim(ClaimTypes.Role, "Admin")
-
-
                 };
 
                 var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);

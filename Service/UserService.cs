@@ -59,7 +59,6 @@ namespace FOODEE.Service
                 RoleId = createuserDto.RoleId,
 
             };
-
             _userRoleRepository.Add(userRole);
         }
 
