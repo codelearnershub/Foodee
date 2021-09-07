@@ -13,10 +13,6 @@ namespace FOODEE.Models
         public string Description { get; set; }
         public decimal Price { get; set; }
         public string Image { get; set; }
-        public int MenuId { get; set; }
-        public Menu Menu { get; set; }
-        public ICollection<Menu> Menus { get; set; } = new HashSet<Menu>();
-        public ICollection<MenuItem> MenuItems { get; set; } = new HashSet<MenuItem>();
         public ICollection<MenuMenuItem> MenuMenuItems { get; set; } = new HashSet<MenuMenuItem>();
         public ICollection<OrderItem> OrderItem { get; set; } = new HashSet<OrderItem>();
     }

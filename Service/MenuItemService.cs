@@ -43,7 +43,7 @@ namespace FOODEE.Service
                 };
                 menuMenuItems.Add(menuMenuItem);
             }
-            menuitem.Menus = menuMenuItems;
+            menuitem.MenuMenuItems = menuMenuItems;
             return menuitemRepository.Add(menuitem);
         }
 
