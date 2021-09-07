@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FOODEE.Repository
 {
-    public class MenuMenuItemRepository:IMenuMenuItemRepository
+    public class MenuMenuItemRepository: IMenuMenuItemRepository
     {
         private readonly FoodeeDbContext _dbContext;
         public MenuMenuItemRepository(FoodeeDbContext dbContext)

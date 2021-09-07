@@ -47,7 +47,7 @@ namespace FOODEE.Repository
 
         public List<MenuItem> GetAll()
         {
-            return _dbContext.MenuItems.ToList();
+            return _dbContext.MenuItems.Include(m => m.MenuMenuItems).ThenInclude(m => m.Menu).ToList();
 
         }
 
@@ -65,6 +65,13 @@ namespace FOODEE.Repository
         public IList<MenuItem> Search(string searchText)
         {
             return _dbContext.MenuItems.Where(menuitem => EF.Functions.Like(menuitem.Name, $"%{searchText}%")).ToList();
+        }
+
+        public IList<MenuItem> GetMenuItemsByMenuId(int menuId)
+        {
+            return _dbContext.MenuItems
+                .Include(m => m.MenuMenuItems)
+                .Where(m => m.MenuMenuItems.All(m => m.MenuId == menuId)).ToList();
         }
     }
 }

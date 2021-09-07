@@ -69,9 +69,10 @@ namespace FOODEE.Context
                 base.OnModelCreating(modelBuilder);
 
                 modelBuilder.Entity<Menu>().HasMany(m => m.MenuItems)
-                .WithOne(m => m.Manu)
+                .WithOne(m => m.Menu)
                 .HasForeignKey(m => m.MenuId).OnDelete(DeleteBehavior.Restrict);
-                modelBuilder.Entity<MenuItem>().HasMany(m => m.Menus)
+
+                modelBuilder.Entity<MenuItem>().HasMany(m => m.MenuMenuItems)
                 .WithOne(m => m.MenuItem)
                 .HasForeignKey(m => m.MenuItemId).OnDelete(DeleteBehavior.Restrict);
             });

@@ -11,7 +11,7 @@ namespace FOODEE.Models
 
         public int MenuItemId { get; set; }
 
-        public Menu Manu { get; set; }
+        public Menu Menu { get; set; }
 
         public MenuItem MenuItem { get; set; }
     }

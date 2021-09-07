@@ -16,5 +16,7 @@ namespace FOODEE.Interface
         public List<MenuItem> GetAll(IEnumerable<int> menuitemIds);
         public bool Exists(int id);
         public IList<MenuItem> Search(string searchText);
+
+        public IList<MenuItem> GetMenuItemsByMenuId(int menuId);
     }
 }

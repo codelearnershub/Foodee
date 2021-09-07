@@ -1,12 +1,10 @@
-﻿<h6>I AM THE SUPER ADMIN</h6>
-
-@model FOODEE.Models.ViewModel.MenuItemVM
+﻿@*@model FOODEE.Models.MenuItem
 @{ ViewData["Title"] = "Home Page"; }
 <h6>FOODEE HOMIE</h6>
 <div class="container">
     <div class="text-center">
         <button class="btn btn-dark filter-button" data-filter="all">All</button>
-        @foreach (var menu in Model.Menuss)
+        @foreach (var menu in Model.Menus)
         {
             <button class="btn btn-outline-secondary filter-button" data-filter="@menu.Name.Replace(' ','_')">
                 @menu.Name
@@ -121,5 +119,5 @@
 
         });
     </script>
-}
+}*@
 

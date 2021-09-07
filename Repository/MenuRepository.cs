@@ -1,6 +1,7 @@
 ﻿using FOODEE.Context;
 using FOODEE.Interface;
 using FOODEE.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,7 +44,9 @@ namespace FOODEE.Repository
         }
         public List<Menu> GetAll()
         {
-            return _dbContext.Menus.ToList();
+            return _dbContext.Menus
+                .Include(m => m.MenuItems)
+                .ToList();
 
         }
         public bool Exists(int id)
