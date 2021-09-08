@@ -1,5 +1,8 @@
 ﻿@model IEnumerable<MenuItem>
 @{ ViewData["Title"] = "Home Page"; }
+@{
+    Layout = "_Layout";
+}
 <h6>FOODEE HOMIE</h6>
 <div class="container">
     <div class="row text-center">
@@ -31,7 +34,7 @@
             </div>
             <div class="modal-header ">
 
-                <h5 class="modal-title text-success" id="item-name"> </h5>
+                <h5 class="modal-title text-success" id="menuitem-name">Food </h5>
 
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -42,13 +45,13 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-4">
-                            &#8358 <h5 id="item-price" class="text-dark font-weight-light"></h5>
+                            &#8358 <h5 id="menuitem-price" class="text-dark font-weight-light"></h5>
                         </div>
                         <div class="col-sm-4">
                             <input id="quantity" class="form-control col-sm-12" min="1" type="number" placeholder="Quantity" />
                         </div>
                         <div class="col-sm-4">
-                            &#8358 <h5 id="item-total" class="text-primary font-weight-light"></h5>
+                            &#8358 <h5 id="menuitem-total" class="text-primary font-weight-light"></h5>
                         </div>
                     </div>
                 </div>
@@ -57,7 +60,7 @@
 
             <div class="modal-footer bg-light">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                <button href="#myModal" type="button" id="save" class="btn btn-success trigger-btn" data-toggle="modal">Add to Cart</button>
+                <button href="#myModal" onclick="addToCart(this)" type="button" id="save" class="btn btn-success trigger-btn" data-toggle="modal">Add to Cart</button>
 
             </div>
         </div>
@@ -81,3 +84,9 @@
         </div>
     </div>
 </div>
+
+@*
+<script>
+    let Btn
+
+</script>*@

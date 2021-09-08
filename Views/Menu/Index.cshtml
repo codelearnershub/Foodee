@@ -1,43 +1,51 @@
 ﻿@model IEnumerable<FOODEE.Models.Menu>
 @{
-    Layout = "_Layout";
+    Layout = "_DashboardLayout";
 }
 
-@{
-    ViewData["Title"] = "Index";
-}
-<h1 class="text-center">Available Foods</h1>
-
-<div class="card">
-    <div class="card-body">
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>DisplayOrder</th>
-                    <th>Action</th>
-
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var product in Model)
-                {
-                <tr>
-                    <td> @product.Name</td>
-                    <td> @product.Description</td>
-                    <td> @product.DisplayOrder</td>
-                    <td>
-                        <a class="btn btn-success" asp-action="Update" asp-route-id="@product.Id">Update </a>
-                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@product.Id">Delete</a>
-                    </td>
-                </tr>
-                }
-            </tbody>
-        </table>
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="" style="color:black">Menus</h2>
+        </div>
+        <div class="col-6 text-right">
+            <a asp-action="Add" style="color:black">
+                Add Menu
+            </a>
+        </div>
     </div>
-</div>
-<br>
-<div class="mb-3 border-right">
-    <a class="btn btn-success" asp-controller="Menu" asp-action="Add">Add Menu</a>
+    <br /><br />
+
+    <div class="container">
+        <div class="row">
+            @if (Model.Count() > 0)
+            {
+                @foreach (var menu in Model)
+                {
+                    <div class="col-4 mb-4 col-lg-4 justify-content-center">
+                        <div class="card">
+                            <div class="card-header text-center ">
+                                <h5><b class="card-title" style="color:black">@menu.Name </b></h5>
+
+                                <div class="card-body">
+                                    <div class="card"></div>
+                                    <a asp-action="GetMenuItemByMenuId" asp-route-Id="@menu.Id"><img width="200" height="150" src="@menu.Image" /> </a>
+                                    <a asp-route-Id="@menu.Id" asp-action="Update" class="btn btn-primary mx-2">
+                                        
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                }
+            }
+
+            else
+            {
+                <p> No Menu exists.</p>
+            }
+        </div>
+    </div>
 </div>

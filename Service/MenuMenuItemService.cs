@@ -9,30 +9,37 @@ namespace FOODEE.Service
 {
     public class MenuMenuItemService: IMenuMenuItemService
     {
-        private readonly IMenuMenuItemRepository menumenuItemRepository;
+        private readonly IMenuMenuItemRepository menumenuitemRepository;
 
-        public MenuMenuItemService(IMenuMenuItemRepository menumenuItemRepository)
+        public MenuMenuItemService(IMenuMenuItemRepository menumenuitemRepository)
         {
-            this.menumenuItemRepository = menumenuItemRepository;
+            this.menumenuitemRepository = menumenuitemRepository;
         }
         public MenuMenuItem FindById(int id)
         {
-            return menumenuItemRepository.FindById(id);
+            return menumenuitemRepository.FindById(id);
         }
 
         public MenuMenuItem Add(MenuMenuItem menumenuItem)
         {
-            return menumenuItemRepository.Add(menumenuItem);
+            return menumenuitemRepository.Add(menumenuItem);
         }
 
         public MenuMenuItem Update(MenuMenuItem menumenuItem)
         {
-            return menumenuItemRepository.Update(menumenuItem);
+            return menumenuitemRepository.Update(menumenuItem);
         }
-
+        public IEnumerable<MenuMenuItem> GetMenuByMenuItemId(int menuitemId)
+        {
+            return menumenuitemRepository.GetMenuByMenuItemId(menuitemId);
+        }
+        public IEnumerable<MenuMenuItem> GetMenuItemByMenuId(int menuId)
+        {
+            return menumenuitemRepository.GetMenuItemByMenuId(menuId);
+        }
         public void Delete(int id)
         {
-            menumenuItemRepository.Delete(id);
+            menumenuitemRepository.Delete(id);
         }
     }
 }
