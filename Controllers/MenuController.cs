@@ -1,29 +1,55 @@
-﻿using FOODEE.Interface;
+﻿using FOODEE.DTO;
+using FOODEE.Interface;
 using FOODEE.Models;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using static FOODEE.Models.ViewModel.MenuVM;
 
 namespace FOODEE.Controllers
 {
     public class MenuController : Controller
     {
         private readonly IMenuService _menuService;
-        public MenuController(IMenuService menuService)
+        private readonly IMenuMenuItemService _menumenuitemService;
+        private readonly IMenuItemService _menuitemService;
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        public MenuController(IMenuService menuService,IMenuMenuItemService menumenuitemService, IMenuItemService menuitemService, IWebHostEnvironment webHostEnvironment)
         {
             _menuService = menuService;
+            _menumenuitemService = menumenuitemService;
+            _menuitemService = menuitemService;
+            _webHostEnvironment = webHostEnvironment;
+
         }
 
         [HttpGet]
         public IActionResult Index()
         {
-            var model = _menuService.GetAll();
-            return View(model);
+            IEnumerable<Menu> menus = _menuService.GetAllMenus();
+
+            return View(menus);
         }
+        [HttpGet]
+        public IActionResult GetMenuItemByMenuId(int id)
+        {
+            int userId = int.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value);
 
+            var menumenuItem = _menumenuitemService.GetMenuItemByMenuId(id);
+            List<MenuItem> MenuItems = new List<MenuItem>();
+            foreach (var item in menumenuItem)
+            {
+                var menuitem = _menuitemService.FindById(item.MenuItemId);
+                MenuItems.Add(menuitem);
+            }
 
+            return View(MenuItems);
+        }
         [HttpGet]
         public IActionResult Details(int? id)
         {
@@ -41,21 +67,38 @@ namespace FOODEE.Controllers
             return View(menu);
         }
 
-        [HttpGet]
         public IActionResult Add()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult Add(Menu menu)
+        [ValidateAntiForgeryToken]
+        public IActionResult Add(CreateMenuViewModel createmenuViewmodel)
         {
+            var menuDto = new MenuDto();
             if (ModelState.IsValid)
             {
-                _menuService.Add(menu);
+                if (createmenuViewmodel.Image.FileName != null)
+                {
+                    var file = createmenuViewmodel.Image;
+                    string imageDirectory = Path.Combine(_webHostEnvironment.WebRootPath, "Image");
+                    Directory.CreateDirectory(imageDirectory);
+                    string contentType = file.ContentType.Split('/')[1];
+                    string fileName = $"{Guid.NewGuid()}.{contentType}";
+                    string fullPath = Path.Combine(imageDirectory, fileName);
+                    menuDto.Image = fileName;
+                    using (var fileStream = new FileStream(fullPath, FileMode.Create))
+                    {
+                        file.CopyTo(fileStream);
+                    }
+                }
             }
-            return RedirectToAction(("Index"));
-            //return View();
+            menuDto.Name = createmenuViewmodel.Name;
+            menuDto.Description = createmenuViewmodel.Description;
+            menuDto.MenuItems = createmenuViewmodel.MenuItems;
+            _menuService.Add(menuDto);
+            return View(createmenuViewmodel);
         }
 
         [HttpGet]

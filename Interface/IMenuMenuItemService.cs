@@ -12,5 +12,7 @@ namespace FOODEE.Interface
         public MenuMenuItem Update(MenuMenuItem menumenuitem);
         public void Delete(int id);
         public MenuMenuItem FindById(int id);
+        public IEnumerable<MenuMenuItem> GetMenuByMenuItemId(int menuitemId);
+        public IEnumerable<MenuMenuItem> GetMenuItemByMenuId(int menuId);
     }
 }

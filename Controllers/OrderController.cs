@@ -38,7 +38,7 @@ namespace FOODEE.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public IActionResult Add()
         {
             return View();
         }
@@ -118,8 +118,6 @@ namespace FOODEE.Controllers
         {
             return View();
         }
-
-
         public IActionResult CheckOut()
         {
             if(User.Identity.IsAuthenticated)

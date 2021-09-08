@@ -37,7 +37,7 @@ namespace FOODEE.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public IActionResult Add()
         {
             return View();
         }
