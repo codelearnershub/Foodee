@@ -1,51 +1,34 @@
 ﻿@model IEnumerable<FOODEE.Models.Menu>
 @{
-    Layout = "_DashboardLayout";
+    Layout = "_Layout";
 }
 
 <div class="container p-3">
     <div class="row pt-4">
         <div class="col-6">
-            <h2 class="" style="color:black">Menus</h2>
+            <h2 class="font-weight-bold font-italic text-center" style="color:orangered; font-family:'Times New Roman'">Menu</h2>
         </div>
         <div class="col-6 text-right">
-            <a asp-action="Add" style="color:black">
-                Add Menu
-            </a>
         </div>
     </div>
     <br /><br />
 
     <div class="container">
         <div class="row">
-            @if (Model.Count() > 0)
+            @foreach (var menu in Model)
             {
-                @foreach (var menu in Model)
-                {
-                    <div class="col-4 mb-4 col-lg-4 justify-content-center">
-                        <div class="card">
-                            <div class="card-header text-center ">
-                                <h5><b class="card-title" style="color:black">@menu.Name </b></h5>
-
-                                <div class="card-body">
-                                    <div class="card"></div>
-                                    <a asp-action="GetMenuItemByMenuId" asp-route-Id="@menu.Id"><img width="200" height="150" src="@menu.Image" /> </a>
-                                    <a asp-route-Id="@menu.Id" asp-action="Update" class="btn btn-primary mx-2">
-                                        
-                                    </a>
-                                </div>
-
-                            </div>
-                        </div>
+                <div class="col-lg-3 col-sm-12 col-md-6 mr-2 mb-5" style="border-width:1px; border-color:orangered; margin-left:80px">
+                    <a asp-action="GetByMenu" asp-controller="Menu" asp-route-id="@menu.Id" title="FOODEE" data-toggle="popover" data-trigger="hover" data-content="Click add to cart to enjoy our products">
+                        <img src="~/Image/@menu.Image" class="img img-responsive zoom" alt="Image">
+                    </a>
+                    <div class="text-center" style="color:darkorange; font-size:30px; font-family:'Times New Roman'">
+                        @menu.Name
                     </div>
+                </div>
+                <br />
 
-                }
             }
 
-            else
-            {
-                <p> No Menu exists.</p>
-            }
         </div>
     </div>
 </div>

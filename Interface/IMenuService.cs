@@ -10,9 +10,7 @@ namespace FOODEE.Interface
     public interface IMenuService
     {
         public Menu Update(Menu menu);
-
         public void Delete(int id);
-
         public IEnumerable<Menu> GetAllMenus();
         public List<Menu> GetAll();
         public Menu Add(MenuDto menuDto);

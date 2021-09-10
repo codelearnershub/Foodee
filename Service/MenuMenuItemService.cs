@@ -33,9 +33,9 @@ namespace FOODEE.Service
         {
             return menumenuitemRepository.GetMenuByMenuItemId(menuitemId);
         }
-        public IEnumerable<MenuMenuItem> GetMenuItemByMenuId(int menuId)
+        public IEnumerable<MenuMenuItem> GetByMenu(int menuId)
         {
-            return menumenuitemRepository.GetMenuItemByMenuId(menuId);
+            return menumenuitemRepository.GetByMenu(menuId);
         }
         public void Delete(int id)
         {

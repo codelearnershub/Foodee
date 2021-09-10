@@ -26,23 +26,14 @@ namespace FOODEE.Service
 
             var menu = new Menu
             {
+                Id = menuDto.Id,
                 Image = menuDto.Image,
                 Quantity = menuDto.Quantity,
                 Description = menuDto.Description,
                 Name = menuDto.Name,
             };
-            var menuMenuItems = new List<MenuMenuItem>();
-            foreach (var id in menuDto.MenuItems)
-            {
-                var menuMenuItem = new MenuMenuItem
-                {
-                    MenuItemId = int.Parse(id),
-                    MenuId = menu.Id,
-                };
-                menuMenuItems.Add(menuMenuItem);
-            }
-            menu.MenuMenuItems = menuMenuItems;
-            return menuRepository.Add(menu);
+            menuRepository.Add(menu);
+            return menu;
         }
 
         public Menu Update(Menu menu)

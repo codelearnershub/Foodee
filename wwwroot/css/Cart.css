@@ -1,4 +1,19 @@
-﻿
+﻿.navbar, .navbar-inverse {
+    background: white !important;
+}
+
+#home-menu a:hover{
+    color: darkorange;
+    font-size: 20px;
+    font-family:'Times New Roman';
+}
+
+#home-menu a{
+    color: orange;
+    font-size: 15px;
+    font-family: 'Times New Roman';
+}
+
 .promobg
 
 {
@@ -135,3 +150,69 @@
         background: #6fb32b;
         outline: none;
     }
+
+
+
+
+.card-size {
+    width: 400px;
+    height: 450px;
+    overflow-x: hidden;
+}
+
+
+.card-edge {
+    border-top-left-radius: 0%;
+    border-top-right-radius: 10%;
+    border-bottom-left-radius: 10%;
+    border-bottom-right-radius: 0%;
+}
+
+.img {
+    margin-left: -15px;
+    width: 282px;
+    height: 250px;
+    border-top-left-radius: 0%;
+    border-top-right-radius: 10%;
+    border-bottom-left-radius: 10%;
+    border-bottom-right-radius: 0%;
+}
+
+.smalltext {
+    margin-top: 10px;
+    font-size: 12px;
+}
+
+.bigtext {
+    font-size: 20px;
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.mediumtext {
+    font-size: 15px;
+}
+
+.button {
+    font-size: 20px;
+    color: white;
+    margin-top: 4px;
+    margin-left: 82%;
+    width: 60px;
+    border-top-left-radius: 30%;
+    border-top-right-radius: 0%;
+    border-bottom-left-radius: 0%;
+    border-bottom-right-radius: 0%;
+    background-color: orange;
+}
+
+.money {
+    margin-left: 25%;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: end;
+    font-weight: bold;
+}
+
+.dis {
+    display: grid;
+}

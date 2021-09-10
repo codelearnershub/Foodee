@@ -47,7 +47,7 @@ namespace FOODEE.Repository
 
         public List<MenuItem> GetAll()
         {
-            return _dbContext.MenuItems.Include(m => m.MenuMenuItems).ThenInclude(m => m.Menu).ToList();
+            return _dbContext.MenuItems.Include(m => m.MenuMenuItems).ThenInclude(m => m.Menu).OrderByDescending(d=> d.CreatedAt).ToList();
 
         }
 

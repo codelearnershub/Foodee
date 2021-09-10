@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@ViewData["Title"] - FOODEE</title>
@@ -11,31 +11,47 @@
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="icon" type="image/png" href="~/images/icons/favicon.ico" />
     <link rel="stylesheet" type="text/css" href="~/vendor/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="~/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="~/fonts/iconic/css/material-design-iconic-font.min.css">
-    <link rel="stylesheet" type="text/css" href="~/vendor/animate/animate.css">
-    <link rel="stylesheet" type="text/css" href="~/vendor/css-hamburgers/hamburgers.min.css">
-    <link rel="stylesheet" type="text/css" href="~/vendor/animsition/css/animsition.min.css">
-    <link rel="stylesheet" type="text/css" href="~/vendor/select2/select2.min.css">
-    <link rel="stylesheet" type="text/css" href="~/vendor/daterangepicker/daterangepicker.css">
-    <link rel="stylesheet" type="text/css" href="~/css/util.css">
-    <link rel="stylesheet" type="text/css" href="~/css/main.css">
-    <link rel="stylesheet" href="~/fonts/material-icon/css/material-design-iconic-font.min.css">
-    <link rel="stylesheet" href="~/css/style.css">
+    <link rel="stylesheet" type="text/css" href="~/fonts/font-awesome-4.7.0/css/all">
+    <link rel="stylesheet" href="~/css/Cart.css" />
+    @*<link rel="stylesheet" type="text/css" href="~/fonts/iconic/css/material-design-iconic-font.min.css">
+        <link rel="stylesheet" type="text/css" href="~/vendor/animate/animate.css">
+        <link rel="stylesheet" type="text/css" href="~/vendor/css-hamburgers/hamburgers.min.css">
+        <link rel="stylesheet" type="text/css" href="~/vendor/animsition/css/animsition.min.css">
+        <link rel="stylesheet" type="text/css" href="~/vendor/select2/select2.min.css">
+        <link rel="stylesheet" type="text/css" href="~/vendor/daterangepicker/daterangepicker.css">
+        <link rel="stylesheet" type="text/css" href="~/css/util.css">
+        <link rel="stylesheet" type="text/css" href="~/css/main.css">
+        <link rel="stylesheet" href="~/fonts/material-icon/css/material-design-iconic-font.min.css">
+        <link rel="stylesheet" href="~/css/sweetalert.min.css" />
+
+        <link rel="stylesheet" href="~/css/style.css">*@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3">
+
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">FOODEE</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-             
-              </div>
-                <a class="nav-link font-weight-bolder" asp-area="" asp-controller="User" asp-action="Logout" style="color:deeppink">SignOut</a>
-</nav>
+                <img src="~/images/foodeeLogo.jpg" />
+                @*<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">FOODEE</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>*@
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+
+                        <li id="home-menu" class="nav-item ml-4 font-weight-bold">
+                            <a class="nav-link" style="color:orange" asp-area="" asp-controller="Menu" asp-action="IndexAdmin">Menu</a>
+                        </li>
+                        <li id="home-menu" class="nav-item ml-4 font-weight-bold">
+                            <a class="nav-link" style="color:orange" asp-area="" asp-controller="MenuItem" asp-action="IndexAdmin">Menu Items</a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <a class="btn btn-outline-secondary nav-link font-weight-bold text-dark" asp-area="" asp-controller="User" asp-action="LogOut">Sign Out</a>
+            </div>
+        </nav>
     </header>
     <div class="container">
         <main role="main" class="pb-3">
@@ -62,6 +78,8 @@
     <script src="~/js/main.js"></script>
     <script src="~/vendor/jquery/jquery.min.js"></script>
     <script src="~/js/main.js"></script>
+    <script src="~/js/shoppingcart.min.js"></script>
+    <script src="~/js/sweetalert.min.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

@@ -55,16 +55,16 @@ namespace FOODEE.Controllers
     
             };
             _userService.RegisterUser(createuserDto);
-            return RedirectToAction("User","Login");
+            return RedirectToAction("Login");
         }
         [HttpGet]
         public IActionResult Login()
         {
-            if (HttpContext.User.Identity.IsAuthenticated)
-            {
-                var routeName = HttpContext.Request.Path;
-                return RedirectToAction(routeName);
-            }
+            //if (HttpContext.User.Identity.IsAuthenticated)
+            //{
+            //    var routeName = HttpContext.Request.Path;
+            //    return RedirectToAction(routeName);
+            //}
 
             return View();
         }

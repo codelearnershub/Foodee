@@ -33,6 +33,11 @@ namespace FOODEE.Controllers
             return View(_menuitemService.GetAll());
         }
 
+        public IActionResult IndexAnonymous()
+        {
+            return View(_menuitemService.GetAll());
+        }
+
         [AllowAnonymous]
         public IActionResult Details(int? id)
         {

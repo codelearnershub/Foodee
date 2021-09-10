@@ -23,6 +23,7 @@ namespace FOODEE.Repository
             _dbContext.SaveChanges();
             return menu;
         }
+
         public Menu FindById(int id)
         {
             return _dbContext.Menus.Find(id);

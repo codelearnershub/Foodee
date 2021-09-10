@@ -22,8 +22,10 @@ namespace FOODEE.Controllers
         }
         public IActionResult Index()
         {
-            var menuitems = _menuitemService.GetAll();
-            return View(menuitems);
+            //var menuitems = _menuitemService.GetAll();
+            //return View(menuitems);
+
+            return RedirectToAction("IndexAnonymous","MenuItem");
         }
         public IActionResult Privacy()
         {

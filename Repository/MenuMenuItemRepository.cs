@@ -28,7 +28,7 @@ namespace FOODEE.Repository
             _dbContext.SaveChanges();
             return menumenuitem;
         }
-        public List<MenuMenuItem> GetMenuItemByMenuId(int menuId)
+        public List<MenuMenuItem> GetByMenu(int menuId)
         {
             return _dbContext.MenuMenuItems.Include(c => c.MenuItem).Where(c => c.MenuId == menuId).ToList();
         }

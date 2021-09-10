@@ -36,11 +36,13 @@ namespace FOODEE.Controllers
             return View(menus);
         }
         [HttpGet]
-        public IActionResult GetMenuItemByMenuId(int id)
+        public IActionResult GetByMenu(int id)
         {
-            int userId = int.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value);
 
-            var menumenuItem = _menumenuitemService.GetMenuItemByMenuId(id);
+            var menumenuItem = _menumenuitemService.GetByMenu(id);
+
+            ViewBag.Menu = _menuService.FindById(id).Name;
+
             List<MenuItem> MenuItems = new List<MenuItem>();
             foreach (var item in menumenuItem)
             {
@@ -171,7 +173,6 @@ namespace FOODEE.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
-
             _menuService.Delete(id);
             return RedirectToAction(nameof(Index));
         }

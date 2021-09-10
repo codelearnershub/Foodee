@@ -5,58 +5,39 @@
 
     ViewBag.Title = "Menu";
 }
+<div class="row justify-content-center">
+    <div class="card">
 
-<form asp-action="Add" method="post" enctype="multipart/form-data">
-
-    <div class="border p-3">
-        <div class="form-group row">
-            <h2 class="text-info pl-3">
-                Add Menu
-            </h2>
+        <div class="card-header">
+            <h1 class="text-center">Add Menu</h1>
         </div>
-        <div class="row">
-            <div class="col-8">
-                <div class="form-group row">
-                    <div class="col-4">
-                        <label>Category Name:</label>
-                        <input type="text" asp-for="Name" class="form-control" placeholder="Enter Menu Name" Required>
-                        <span asp-validation-for="Name" class="text-danger"></span>
-                    </div><br><br>
 
-                </div>
-                <div class="form-group row">
-                    <div class="col-4">
-                        <label>Description:</label>
-                        <input type="text" asp-for="Description" class="form-control" placeholder="Enter Description" Required>
-                        <span asp-validation-for="Description" class="text-danger"></span>
-                    </div><br><br>
+        <div class="card-body">
 
+            <form method="post" asp-action="Add" enctype="multipart/form-data">
+
+                <div class="form-group">
+                    <input asp-for="Name" class="form-control" placeholder="Enter Name" />
+                    <span asp-validation-for="Name" class="text-danger"></span><br>
+
+                    <input asp-for="Image" class="form-control" type="file" />
+                    <span asp-validation-for="Image" class="text-danger"></span><br>
+
+                    <input asp-for="Description" class="form-control" placeholder="Item Description" />
+                    <span asp-validation-for="Description" class="text-danger"></span><br>
                 </div>
-                <div class="form-group row">
-                    <div class="col-4">
-                        <label>Image:</label>
-                        <input type="file" name="files" asp-for="Image" multiple class="form-control" Required>
-                        <span class="text-danger"></span><br>
-                    </div>
+                <div class="form-group">
+                    <input type="submit" value="Add" class="btn btn-outline-success" />
                 </div>
 
-                <div class="form-group row justify-content-left">
-                    <div class="col">
+            </form>
 
-                        <input type="submit" asp-action="Add" class="btn btn-primary" value="Add">
-
-                    </div>
-                </div>
-
-
-                <div class="col">
-                    <a asp-action="Index" class="btn btn-success w-50"><i class="fas fa-sign-out-alt"></i> Back</a>
-                </div>
-
-            </div>
         </div>
     </div>
-</form>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
 
 
 @section Scripts {
