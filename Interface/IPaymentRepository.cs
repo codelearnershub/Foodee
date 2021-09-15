@@ -14,5 +14,6 @@ namespace FOODEE.Interface
         public Payment Update(Payment payment);
         public List<Payment> GetAll();
         public bool Exists(int id);
+        public Payment FindByReference(string PaymentRef);
     }
 }

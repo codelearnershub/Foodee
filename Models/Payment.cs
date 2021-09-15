@@ -10,5 +10,6 @@ namespace FOODEE.Models
         public int OrderId { get; set; }
         public int UserId { get; set; }
         public User User { get; set; }
+        public string PaymentRef { get; set; }
     }
 }

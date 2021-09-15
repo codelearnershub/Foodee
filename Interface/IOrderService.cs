@@ -14,6 +14,6 @@ namespace FOODEE.Interface
         public List<Order> GetAll();
         public Order FindById(int id);
         public bool Exists(int id);
-        List<OrderItem> Menu(int customerId, IEnumerable<Menu> orderItems, string deliveryAddress);
+        public List<OrderItem> Menu(string name, decimal totalprice, int userId, IEnumerable<Menu> orderItems, string deliveryAddress, bool IsPaid = false);
     }
 }

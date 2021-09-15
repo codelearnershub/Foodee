@@ -1,0 +1,42 @@
+﻿@model FOODEE.Models.MenuItem 
+@{ ViewBag.Title = "Details"; }
+
+@{
+
+    Layout = "_CustomerDashboardLayout";
+
+}
+
+
+<img src="~/Image/@Model.Image" class="img img-responsive zoom" alt="Image">
+
+<div>
+    <br />
+    <div class="" style="font-size: 20px">
+
+
+        <span class="font-weight-bolder"><span style="color:darkred">*</span>Food Type: <span style="color:darkred">@Model.Name</span></span><br /><br />
+
+        <span class="font-weight-bolder"><span style="color:darkred">*</span>Food Price: <span style="font-weight: lighter">@Model.Description</span></span><br /><br />
+
+            <span class="font-weight-bolder" style="color:red"><span style="color:darkred">*</span>Food Description: <span class="comma">@Model.Price</span></span><br /><br />
+    </div>
+</div>
+<script>
+
+    function numberWithCommas(x) {
+        let newNumber = x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+        return newNumber
+    }
+
+
+    let comma = document.getElementsByClassName("comma");
+
+
+    for (var i = 0; i < comma.length; i++) {
+        let result = numberWithCommas(comma[i].innerHTML);
+        document.getElementsByClassName("comma")[i].innerHTML = result;
+    }
+
+
+</script>

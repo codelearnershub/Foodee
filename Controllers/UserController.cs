@@ -60,17 +60,11 @@ namespace FOODEE.Controllers
         [HttpGet]
         public IActionResult Login()
         {
-            //if (HttpContext.User.Identity.IsAuthenticated)
-            //{
-            //    var routeName = HttpContext.Request.Path;
-            //    return RedirectToAction(routeName);
-            //}
-
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(LoginViewModel vm)
+        public async Task<IActionResult> Login(LoginViewModel vm, string returnUrl)
         {
             CreateUserDto createuserDto = new CreateUserDto
             {
@@ -129,10 +123,7 @@ namespace FOODEE.Controllers
                     new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                     new Claim(ClaimTypes.Email, user.Email),
                     new Claim(ClaimTypes.Role, "Customer")
-
-
                 };
-
                 var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
                 var principal = new ClaimsPrincipal(identity);
@@ -140,11 +131,17 @@ namespace FOODEE.Controllers
                 var props = new AuthenticationProperties();
 
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, props);
-                //return RedirectToAction("Index", "Home");
+               
             }
-            if (role == "SuperAdmin")
+
+            if (returnUrl != null)
             {
-                return RedirectToAction("Index", "SuperAdmin");
+                return Redirect(returnUrl);
+            }
+
+            else if (role == "SuperAdmin")
+            {
+                return RedirectToAction("IndexAdmin", "Menu");
             }
             else if (role == "Admin")
             {
@@ -162,6 +159,10 @@ namespace FOODEE.Controllers
         }
         public async Task<IActionResult> Logout()
         {
+            int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            User userlogin = _userService.FindById(userId);
+            ViewBag.UserName = $"{userlogin.FirstName} .{userlogin.LastName[0]}";
+
             await HttpContext.SignOutAsync();
             return RedirectToAction("Login");
         }

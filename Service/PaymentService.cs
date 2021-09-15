@@ -19,6 +19,10 @@ namespace FOODEE.Service
         {
             return paymentRepository.FindById(id);
         }
+        public Payment FindByReference(string PaymentRef)
+        {
+            return paymentRepository.FindByReference(PaymentRef);
+        }
 
         public Payment Add(Payment payment)
         {

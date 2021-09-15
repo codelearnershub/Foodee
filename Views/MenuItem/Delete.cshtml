@@ -1,5 +1,5 @@
 ﻿@model FOODEE.Models.MenuItem
-<form method="post" asp-action="Delete">
+<form method="post" asp-action="Delete" asp-controller="MenuItem">
     <input asp-for="Id" hidden />
     <div class="border p-3">
 
@@ -51,7 +51,7 @@
                             <input type="submit" class="btn btn-danger w-100" value="Delete" />
                         </div>
                         <div class="col">
-                            <a asp-action="Index" class="btn btn-primary w-100">
+                            <a asp-action="IndexAdmin" class="btn btn-primary w-100">
                                 <i class="fas fa-sign-plus-alt"></i>Back
                             </a>
                         </div>

@@ -25,7 +25,10 @@ namespace FOODEE.Repository
         {
             return _dbContext.Payments.Find(id);
         }
-
+        public Payment FindByReference(string PaymentRef)
+        {
+            return _dbContext.Payments.Find(PaymentRef);
+        }
         public void Delete(int id)
         {
             var payment = FindById(id);

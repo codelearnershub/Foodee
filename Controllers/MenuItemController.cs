@@ -32,6 +32,12 @@ namespace FOODEE.Controllers
         {
             return View(_menuitemService.GetAll());
         }
+        public IActionResult IndexAdmin()
+        {
+            IEnumerable<MenuItem> menuitems = _menuitemService.GetAll();
+
+            return View(menuitems);
+        }
 
         public IActionResult IndexAnonymous()
         {

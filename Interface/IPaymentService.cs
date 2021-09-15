@@ -13,5 +13,6 @@ namespace FOODEE.Interface
         public void Delete(int id);
         public List<Payment> GetAll();
         public Payment FindById(int id);
+        public Payment FindByReference(string PaymentRef);
     }
 }

@@ -36,6 +36,13 @@ namespace FOODEE.Controllers
             return View(menus);
         }
         [HttpGet]
+        public IActionResult IndexAdmin()
+        {
+            IEnumerable<Menu> menus = _menuService.GetAllMenus();
+
+            return View(menus);
+        }
+        [HttpGet]
         public IActionResult GetByMenu(int id)
         {
 

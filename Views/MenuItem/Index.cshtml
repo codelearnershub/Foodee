@@ -5,25 +5,25 @@
 }
 <h6 class="font-weight-bold font-italic text-center" style="color:orangered; font-family:'Times New Roman'">@ViewBag.Menu</h6>
 <div class="col-6 text-right">
-    <a asp-action="Add" style="color:black">
+    @*<a asp-action="Add" class="btn btn-outline-secondary nav-link font-weight-bold text-dark"><i class="fas fa-plus"></i>
         Add MenuItem
-    </a>
+    </a>*@
 </div>
     <div class="row">
         @foreach (var item in Model)
         {
-            <div id="cart-products"class="col-lg-3 col-sm-12 col-md-6 mr-2 mb-5 card card-size card-edge" style="border-width:1px; border-color:orangered; margin-left:80px">
-                <a asp-action="Details" asp-controller="MenuItem" asp-route-id="@item.Id" title="FOODEE" data-toggle="popover" data-trigger="hover" data-content="Click add to cart to enjoy our products">
-                    <img src="~/Image/@item.Image" class="img img-responsive zoom" alt="Image">
-                </a>
-                <div>
-                    <span class="bigtext">@item.Name</span><span class="money">&#8358 <span class="comma">@item.Price</span></span>
-                </div>
-
-                <span class="mediumtext">Served with French Fries + Drinks</span>
-                <p class="smalltext">@item.Description</p>
-                <a asp-controller="Home" asp-action="AddTocart" class="btn button"><i class="fas fa-shopping-cart"></i></a>
+        <div id="cart-products" class="col-lg-3 col-sm-12 col-md-6 mr-2 mb-5 card card-size card-edge" style="border-width:1px; border-color:orangered; margin-left:80px">
+            <a asp-action="Details" asp-controller="MenuItem" asp-route-id="@item.Id" title="FOODEE" data-toggle="popover" data-trigger="hover" data-content="Click add to cart to enjoy our products">
+                <img src="~/Image/@item.Image" class="img img-responsive zoom" alt="Image">
+            </a>
+            <div>
+                <span class="bigtext">@item.Name</span><span class="money">&#8358 <span class="comma">@item.Price</span></span>
             </div>
+
+            <span class="mediumtext">Served with French Fries + Drinks</span>
+            <p class="smalltext">@item.Description</p>
+            <button type="submit" onclick="addToCart(this)" id="item-@item.Id" data-name="@item.Name" data-price="@item.Price" data-id="@item.Id" class="" style="width:70%; background-color:orangered; margin-left:20px; margin-right:20px" data-toggle="modal" data-target="#cart-modal"><span class="font-weight-bold" style="color:white; font-family:'Times New Roman'">+ Cart</span></button>
+        </div>
 
         }
 
@@ -55,13 +55,13 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-sm-4">
-                                &#8358 <h5 id="menuitem-price" class="text-dark font-weight-light"></h5>
+                                &#8358 <h5 id="item-price" class="text-dark font-weight-light"></h5>
                             </div>
                             <div class="col-sm-4">
                                 <input id="quantity" class="form-control col-sm-12" min="1" type="number" placeholder="Quantity" />
                             </div>
                             <div class="col-sm-4">
-                                &#8358 <h5 id="menuitem-total" class="text-primary font-weight-light"></h5>
+                                &#8358 <h5 id="item-total" class="text-primary font-weight-light"></h5>
                             </div>
                         </div>
                     </div>

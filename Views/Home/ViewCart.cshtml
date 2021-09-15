@@ -1,4 +1,11 @@
-﻿<div class="container">
+﻿@{
+    Layout = "_DashboardLayout";
+}
+
+@{
+    ViewBag.Title = "Cart";
+}
+<div class="container">
     <div class="row justify-content-center">
         <div class="card w-50">
             <div class="card-header text-center tex-white ">
@@ -9,8 +16,22 @@
 
 
             </div>
-            <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-secondary">Continue Shopping</a>
-            <a asp-area="" asp-controller="Order" asp-action="Checkout" class="btn btn-dark">Checkout</a>
+            <a style="color: black; width:100px" asp-area="" class="btn" asp-controller="Order" asp-action="CheckOut">Checkout</a>
+            <a style="color: orangered; width:200px" asp-area="" class="btn" asp-controller="Home" asp-action="Index">Continue Shopping</a>
         </div>
     </div>
 </div>
+
+<script>
+    function numberWithCommas(x) {
+        let newNumber = x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+        return newNumber
+    }
+
+    let comma = document.getElementsByClassName("comma");
+
+    for (var i = 0; i < comma.length; i++) {
+        let result = numberWithCommas(comma[i].innerHTML);
+        document.getElementsByClassName("comma")[i].innerHTML = result;
+    }
+</script>

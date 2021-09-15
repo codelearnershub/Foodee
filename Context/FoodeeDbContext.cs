@@ -12,6 +12,7 @@ namespace FOODEE.Context
         public FoodeeDbContext(DbContextOptions options) : base(options)
         {
         }
+        public DbSet<Cart> Carts { get; set; }
         public DbSet<Menu> Menus { get; set; }
         public DbSet<MenuItem> MenuItems { get; set; }
         public DbSet<MenuMenuItem> MenuMenuItems { get; set; }

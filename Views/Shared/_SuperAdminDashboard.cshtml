@@ -19,19 +19,19 @@
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3">
 
             <div class="container">
-                <img src="~/images/foodeeLogo.jpg" />
+                < <a asp-controller="MenuItem" asp-action="IndexAnonymous"><img src="~/images/foodeeLogo.jpg" /></a>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
 
                         <li id="home-menu" class="nav-item ml-4 font-weight-bold">
-                            <a class="nav-link" style="color:orange" asp-area="" asp-controller="Menu" asp-action="Index">Menu</a>
+                            <a class="nav-link" style="color:orange" asp-area="" asp-controller="Menu" asp-action="IndexAdmin">Menu</a>
                         </li>
                         <li id="home-menu" class="nav-item ml-4 font-weight-bold">
-                            <a class="nav-link" style="color:orange" asp-area="" asp-controller="MenuItem" asp-action="Index">MenuItem</a>
+                            <a class="nav-link" style="color:orange" asp-area="" asp-controller="MenuItem" asp-action="IndexAdmin">MenuItem</a>
                         </li>
                     </ul>
                 </div>
-                <a class="btn btn-outline-secondary nav-link font-weight-bold text-dark" asp-area="" asp-controller="User" asp-action="LogOut">Sign Out</a>
+                <a style="color:  black" class="nav-link font-italic font-weight-bold" asp-controller="User" asp-action="LogOut">SignOut <i class="fas fa-sign-out-alt"></i></a>
             </div>
         </nav>
     </header>
