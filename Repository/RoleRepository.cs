@@ -10,8 +10,8 @@ namespace FOODEE.Repository
 {
     public class RoleRepository: IRoleRepository
     {
-        private readonly FoodeeDbContext _dbContext;
-        public RoleRepository(FoodeeDbContext dbContext)
+        private readonly FOODEEDbContext _dbContext;
+        public RoleRepository(FOODEEDbContext dbContext)
         {
             _dbContext = dbContext;
         }

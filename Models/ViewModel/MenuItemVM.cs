@@ -17,6 +17,5 @@ namespace FOODEE.Models.ViewModel
         public ICollection<Menu> Menuss { get; set; } = new HashSet<Menu>();
         public ICollection<MenuItem> MenuItems { get; set; } = new HashSet<MenuItem>();
         public ICollection<MenuMenuItem> MenuMenuItems { get; set; } = new HashSet<MenuMenuItem>();
-        public ICollection<OrderItem> OrderItem { get; set; } = new HashSet<OrderItem>();
     }
 }

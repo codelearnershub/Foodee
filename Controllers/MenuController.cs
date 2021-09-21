@@ -60,6 +60,23 @@ namespace FOODEE.Controllers
             return View(MenuItems);
         }
         [HttpGet]
+        public IActionResult GetByMenuA(int id)
+        {
+
+            var menumenuItem = _menumenuitemService.GetByMenu(id);
+
+            ViewBag.Menu = _menuService.FindById(id).Name;
+
+            List<MenuItem> MenuItems = new List<MenuItem>();
+            foreach (var item in menumenuItem)
+            {
+                var menuitem = _menuitemService.FindById(item.MenuItemId);
+                MenuItems.Add(menuitem);
+            }
+
+            return View(MenuItems);
+        }
+        [HttpGet]
         public IActionResult Details(int? id)
         {
             if (id == null)

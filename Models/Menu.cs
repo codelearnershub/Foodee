@@ -14,9 +14,7 @@ namespace FOODEE.Models
        public int MenuItemId { get; set; }
        public string Description { get; set; }
        public int Quantity { get; set; }
-      // public MenuItem MenuItem { get; set; } 
-        public ICollection<MenuItem> MenuItem { get; set; } = new HashSet<MenuItem>();
-        public ICollection<MenuMenuItem> MenuMenuItems { get; set; } = new HashSet<MenuMenuItem>();
+       public ICollection<MenuMenuItem> MenuMenuItems { get; set; } = new HashSet<MenuMenuItem>();
 
     }
 }

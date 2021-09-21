@@ -202,18 +202,19 @@ const checkoutItemPriceLabel = $("#item-price1");
 const modalMenu = $("#modal-menu");
 
 function addToCart(itemHTMLElement) {
+
     const itemElement = $(itemHTMLElement);
     const price = parseInt(itemElement.attr("data-price"));
-   
+
     const name = itemElement.attr("data-name");
-   
+
     const itemId = itemElement.data("id");
     const itemPicture = itemElement.data("itemPicture");
 
     modalItemNameLabel.data("elementId", itemHTMLElement.id);
     modalItemNameLabel.html(name);
     modalItemPriceLabel.html(`Unit Price: ${price}`);
-    modalItemPriceLabel.innerHTML = `Unit Price: ${price}` ;
+    modalItemPriceLabel.innerHTML = `Unit Price: ${price}`;
     modalItemPictureLabel.html(itemPicture);
 
     function onQuantityChanged() {
@@ -306,31 +307,56 @@ function getCart() {
     return JSON.parse(localStorage.getItem("cart")) || [];
 }
 
-$("#save").on("click", function () {
+//     $("#save").on("click", function () {
+//         const elementId = modalItemNameLabel.data("elementId");
+//     const itemElement = $(`#${elementId}`);
+//     const itemId = itemElement.data("id");
+//
+//     console.log(`Adding to cart....`, itemId);
+//    
+//     const price = parseInt(itemElement.data("price"));
+//     const name = itemElement.data("name");
+//     const quantity = parseInt(modalItemQuantityInput.val());
+//     const itemPicture = itemElement.data("itemPicture");
+//
+//     const item = { itemId, name, quantity, price, itemPicture };
+//     const cart = getCart();
+//     updateOrAddToCart(cart, item);
+//     updateCart(cart);
+//     updateCartMenu();
+//     cartModal.modal("toggle");
+// });
+
+function saveToCart(isUserLoggedIn = "False") {
+    const isUserLoggedInBool = isUserLoggedIn.toLocaleLowerCase() === "true";
+
+    console.log("Is User Logged In", isUserLoggedInBool);
+
     const elementId = modalItemNameLabel.data("elementId");
     const itemElement = $(`#${elementId}`);
-
-    const price = parseInt(itemElement.data("price"));
-    const name = itemElement.data("name");
-    const quantity = parseInt(modalItemQuantityInput.val());
     const itemId = itemElement.data("id");
-    const itemPicture = itemElement.data("itemPicture");
+    const quantity = parseInt(modalItemQuantityInput.val());
 
-    const item = { itemId, name, quantity, price, itemPicture };
-    const cart = getCart();
-    updateOrAddToCart(cart, item);
-    updateCart(cart);
-    updateCartMenu();
-    cartModal.modal("toggle");
-});
+    console.log(`Adding ${quantity} of item ${itemId} to cart....`);
 
+
+    if (isUserLoggedInBool) {
+        fetch(`/cart/AddToCart?id=${itemId}&count=${quantity}`)
+            .then(res => res.json())
+            .then(res => console.log(res));
+    }
+    else {
+
+    }
+
+}
 function updateCart(cart) {
     localStorage.setItem("cart", JSON.stringify(cart));
 }
 
 function updateCartMenu() {
     const cart = getCart();
-   
+
     let elements = `<table class="timetable_sub">
                             <thead class="">
                                 <tr>
@@ -348,11 +374,11 @@ function updateCartMenu() {
     let subTotalPrice = 0;
     cart.forEach((item) => {
         itemTotalPrice = item.quantity * item.price;
-       
+
         subTotalPrice += itemTotalPrice;
         tax = subTotalPrice * 0.05;
         totalPrice = subTotalPrice + tax;
-        
+
 
         elements += ` <tbody>
                         <tr class="rem1">
@@ -383,9 +409,9 @@ function updateCartMenu() {
 
     elements += `<button class="btn btn-sm btn-danger"style="width: 50px" onclick="clearCart(getCart())">Empty Cart</button>`;
 
-    cartMenu.html(elements);
+    // cartMenu.html(elements);
     var totalQuantity = getTotalQuantity();
-    totalQuantityLabel.html(totalQuantity);
+    //totalQuantityLabel.html(totalQuantity);
     checkouQuantitytLabel.html(totalQuantity);
     checkoutTotalLabel.html(totalPrice);
     modalMenu.html(elements);

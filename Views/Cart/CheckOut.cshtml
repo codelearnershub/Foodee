@@ -1,0 +1,99 @@
+﻿@using FOODEE.Models.ViewModel
+@model FOODEE.Models.ViewModel.CartVM.CheckOut
+@{
+    Layout = "_CustomerDashboardLayout";
+
+}
+
+@{
+    ViewBag.Title = "CheckOut";
+    var totalPrice = Model.Cart.CartItems.Sum(i => i.MenuItem.Price);
+    var vat = totalPrice * (decimal) 0.05;
+    CartVM.CartItemComparer cartItemComparer = new CartVM.CartItemComparer();
+}
+<div class="card-header text-center tex-white ">
+    <h5 class="text-success ">CheckOut</h5>
+</div>
+<div class="row">
+    <div class="col-lg">
+        <div class="" style="font-size: 1px">
+            <h2 style="color:black; font-size:20px; font-family:'Times New Roman'">
+                <em>UserName:</em>
+            </h2>
+            <h5 style="width: max-content">@Model.CustomerName</h5>
+        </div>
+        <div class="" style="font-size: 20px">
+            <h2 style="color:black; font-size:20px; font-family:'Times New Roman'">
+                <em>Email</em>
+            </h2>
+            <h5 style="width: max-content">@Model.CustomerEmail</h5>
+        </div><br/>
+        <div class="" style="font-size: 20px">
+            <h2 style="color:black; font-size:20px; font-family:'Times New Roman'">
+                <em>PhoneNumber</em>
+            </h2>
+            <h5 style="width: max-content">@Model.PhoneNumber</h5>
+        </div>
+        <div class="card-body">
+            <h2 style="color:black; font-size:20px; font-family:'Times New Roman'">
+                <em>Delivery Address</em>
+            </h2>
+            <h1 style="width: max-content">@Model.CustomerAddress</h1>
+        </div>
+    </div>
+    <br/>
+    <div class="col-lg">
+        <div class="coler-25">
+            <div class="container">
+
+                <div class="notification text-success">
+                    <h5>
+                        FOODEE CART<i class="fa fa-fw fa-shopping-cart"></i><span class="badge" id='newTotalQuantityLabel'></span>
+                    </h5>
+                </div>
+                <div class="card-body ">
+                    <br>
+                    <table class="timetable_sub">
+                        <thead class="">
+                        <tr>
+                            <td>Product</td>
+                            <td>Price</td>
+                            <td>Quantity</td>
+                            <td>Sub-Total</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach (var item in Model.Cart.CartItems.Distinct(cartItemComparer))
+                        {
+                            <tr class="rem1">
+                                <td class="invert" id="item-name1">@item.MenuItem.Name</td>
+                                <td class="invert" id="price_undefined">₦ @item.MenuItem.Price</td>
+                                <td class="invert text-dark">
+                                    @Model.Cart.CartItems.Count(i => i.MenuItem.Id == item.MenuItem.Id);
+                                </td>
+                                <td class="invert" id="totalPrice_undefined">
+                                    ₦ @(item.MenuItem.Price * @Model.Cart.CartItems.Count(i => i.MenuItem.Id == item.MenuItem.Id))
+                                </td>
+                            </tr>
+                        }
+
+                        </tbody>
+                    </table>
+                    <strong class="float-right text-success font-weight-bolder">Sub-total: ₦ @totalPrice</strong><br><br>
+                    <div></div>
+                    <strong class="float-right text-success font-weight-bolder">Tax (5%): ₦ @vat</strong>
+                    <div></div><br>
+                    <strong class="float-right text-success font-weight-bolder">Total Price: ₦ @(totalPrice + vat)</strong>
+                    <p></p>
+                    <a asp-action="EmptyCart">
+                        <button style="width:100px; background-color:orangered" class="btn">Empty Cart</button>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col">
+    <a style="background-color:orangered; width:300px" asp-controller="Order" asp-action="Add" class="btn mx-2">Proceed To Payment</a>
+</div>

@@ -8,9 +8,9 @@ namespace FOODEE.Models
     public class Cart: BaseEntity
     {
         public int userId { get; set; }
-        public User User { get; set; }
-        public int MenuItemId { get; set; }
+        public Customer Customer { get; set; }
+        public bool IsCheckedOut { get; set; }
 
-        public MenuItem MenuItem { get; set; } = new MenuItem();
+        public List<CartItem> CartItems { get; set; } = new List<CartItem>();
     }
 }

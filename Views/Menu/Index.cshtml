@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<FOODEE.Models.Menu>
 @{
-    Layout = "_Layout";
+    Layout = "_AnonymousDashboard";
 }
 
-<div class="container p-3">
-    <div class="row pt-4">
+<div class="container ">
+    <div class="row">
         <div class="col-6 text-right">
             <div class="col-6">
                 <h2 class="font-weight-bold font-italic text-center" style="color:orangered; font-family:'Times New Roman'">Menu</h2>
@@ -13,14 +13,14 @@
     </div>
     <br /><br />
 
-    <div class="container">
+   
         <div class="row">
             @if (Model.Count() > 0)
             {
                 @foreach (var menu in Model)
                 {
-                    <div class="col-lg-3 col-sm-12 col-md-6 mr-2 mb-5" style="border-width:1px; border-color:orangered; margin-left:80px">
-                        <a asp-action="GetByMenu" asp-controller="Menu" asp-route-id="@menu.Id" title="FOODEE" data-toggle="popover" data-trigger="hover" data-content="Click add to cart to enjoy our products">
+                    <div class="col-lg-3 col-sm-12 col-md-6 mr-2 mb-5" style="border-width:1px; border-color:orangered; margin-left:60px">
+                        <a asp-action="GetByMenuA" asp-controller="Menu" asp-route-id="@menu.Id" title="FOODEE" data-toggle="popover" data-trigger="hover" data-content="Click add to cart to enjoy our products">
                             <img src="~/Image/@menu.Image" class="img img-responsive zoom" alt="Image">
                         </a>
                         <div class="text-center" style="color:darkorange; font-size:30px; font-family:'Times New Roman'">
@@ -37,7 +37,7 @@
                 <p> No Menu exists.</p>
             }
         </div>
-    </div>
+    
 </div>
 
 

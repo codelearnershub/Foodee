@@ -19,18 +19,16 @@ namespace FOODEE.Controllers
         private readonly IMenuItemService _menuitemService;
         private readonly IMenuService _menuService;
         private readonly IMenuMenuItemService _menumenuitemService;
-        public IUserService _userService;
-        public IUserRoleService _userRoleService;
-        public IRoleService _roleService;
+        public readonly IUserService _userService;
+        public readonly ICartService _cartService;
 
-        public CustomerController(IMenuItemService menuitemService, IMenuService menuService, IMenuMenuItemService menumenuitemService, IUserService userService, IUserRoleService userRoleService, IRoleService roleService)
+        public CustomerController(IMenuItemService menuitemService, IMenuService menuService, IMenuMenuItemService menumenuitemService, IUserService userService, IUserRoleService userRoleService, IRoleService roleService,ICartService cartService)
         {
             _menuitemService = menuitemService;
             _menuService = menuService;
             _menumenuitemService = menumenuitemService;
             _userService = userService;
-            _userRoleService = userRoleService;
-            _roleService = roleService;
+            _cartService = cartService;
         }
 
         public IActionResult Index()
@@ -38,66 +36,33 @@ namespace FOODEE.Controllers
             return View(_menuService.GetAll());
         }
         [HttpGet]
-        public IActionResult GetByMenu(int id)
+        //public IActionResult GetByMenu(int id)
+        //{
+
+        //    var menumenuItem = _menumenuitemService.GetByMenu(id);
+
+        //    ViewBag.Menu = _menuService.FindById(id).Name;
+
+        //    List<MenuItem> MenuItems = new List<MenuItem>();
+        //    foreach (var item in menumenuItem)
+        //    {
+        //        var menuitem = _menuitemService.FindById(item.MenuItemId);
+        //        MenuItems.Add(menuitem);
+        //    }
+
+        //    return View(MenuItems);
+        //}
+        public IActionResult CustomerIndex()
         {
-
-            var menumenuItem = _menumenuitemService.GetByMenu(id);
-
-            ViewBag.Menu = _menuService.FindById(id).Name;
-
-            List<MenuItem> MenuItems = new List<MenuItem>();
-            foreach (var item in menumenuItem)
+            var model = new HomeVM.IndexAnonymous
             {
-                var menuitem = _menuitemService.FindById(item.MenuItemId);
-                MenuItems.Add(menuitem);
-            }
-
-            return View(MenuItems);
-        }
-
-        [HttpGet]
-        [AllowAnonymous]
-        public IActionResult Login()
-        {
-
-            return View();
-        }
-        [HttpPost]
-        [AllowAnonymous]
-        public async Task<IActionResult> Login(LoginViewModel vm, bool isCheckout = false)
-        {
-            CreateUserDto createuserDto = new CreateUserDto
-            {
-                Email = vm.Email,
-                Password = vm.Password,
+                MenuItems = _menuitemService.GetAll(),
+                NumberOfCartItems = (User.Identity.IsAuthenticated && User.IsInRole("customer"))
+                    ? _cartService.GetNumberOfCartItems(
+                        Convert.ToInt32(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                    : 0
             };
-            User user = _userService.LoginUser(createuserDto);
-            if (user == null)
-            {
-                if (isCheckout)
-                {
-                    return RedirectToAction("Checkout","Order");
-                }
-                return View();
-            }
-            else
-            {
-                var claims = new List<Claim>
-                {
-                    new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                    new Claim(ClaimTypes.Email, user.Email),
-                    new Claim(ClaimTypes.Role, "Customer")
-                };
-
-                var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-
-                var principal = new ClaimsPrincipal(identity);
-
-                var props = new AuthenticationProperties();
-
-                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, props);
-                return isCheckout ? RedirectToAction("Checkout", "Order") : RedirectToAction("Index", "Home");
-            }
+            return View(model);
         }
     }   
 }

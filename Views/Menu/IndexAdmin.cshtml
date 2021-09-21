@@ -9,7 +9,7 @@
             <h2 class="font-weight-bold font-italic text-center" style="color:orangered; font-family:'Times New Roman'">Menu</h2>
         </div>
         <div class="col-6 text-right">
-            <a asp-action="Add" asp-controller="Menu" class="btn btn-outline-secondary nav-link font-weight-bold text-dark" style="width: 100px">
+            <a asp-action="Add" asp-controller="Menu" class="btn nav-link font-weight-bold text-dark" style="width: 150px; background-color:orangered">
                 <i class="fas fa-plus"></i>
                 Add Menu
             </a>
@@ -31,8 +31,8 @@
             </div>
                 <br />
                 <div class="col">
-                    <a asp-controller="Menu" asp-route-Id="@menu.Id" asp-action="Edit" class="btn btn-primary mx-2"><i class="fas fa-edit"></i></a>
-                    <a asp-controller="Menu" asp-route-Id="@menu.Id" asp-action="Delete" class="btn btn-danger mx-2"><i class="far fa-trash-alt"></i></a>
+                    <a style="background-color:darkorange" asp-controller="Menu" asp-route-Id="@menu.Id" asp-action="Edit" class="btn mx-2"><i class="fas fa-edit"></i></a>
+                    <a style="background-color:darkorange" asp-controller="Menu" asp-route-Id="@menu.Id" asp-action="Delete" class="btn mx-2"><i class="far fa-trash-alt"></i></a>
 
                 </div>
 

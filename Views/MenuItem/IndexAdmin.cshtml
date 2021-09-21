@@ -5,7 +5,7 @@
 }
 <h6 class="font-weight-bold font-italic text-center" style="color:orangered; font-family:'Times New Roman'">@ViewBag.Menu</h6>
 <div class="col-6 text-right">
-    <a asp-action="Add" class="btn btn-outline-secondary nav-link font-weight-bold text-dark" style="width: 100px">
+    <a asp-action="Add" class="btn  nav-link font-weight-bold text-dark" style="width: 200px; background-color:orangered">
         <i class="fas fa-plus"></i>
         Add MenuItem
     </a>
@@ -21,9 +21,9 @@
                 <span class="bigtext">@item.Name</span><span class="money">&#8358 <span class="comma">@item.Price</span></span>
             </div>
 
-            <span class="mediumtext">Served with French Fries + Drinks</span>
+            @*<span class="mediumtext">Served with French Fries + Drinks</span>
             <p class="smalltext">@item.Description</p>
-            <button type="submit" onclick="addToCart(this)" id="item-@item.Id" data-name="@item.Name" data-price="@item.Price" data-id="@item.Id" class="" style="width:70%; background-color:orangered; margin-left:20px; margin-right:20px" data-toggle="modal" data-target="#cart-modal"><span class="font-weight-bold" style="color:white; font-family:'Times New Roman'">+ Cart</span></button>
+            <button type="submit" onclick="addToCart(this)" id="item-@item.Id" data-name="@item.Name" data-price="@item.Price" data-id="@item.Id" class="" style="width:70%; background-color:orangered; margin-left:20px; margin-right:20px" data-toggle="modal" data-target="#cart-modal"><span class="font-weight-bold" style="color:white; font-family:'Times New Roman'">+ Cart</span></button>*@
         </div>
 
     }

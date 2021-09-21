@@ -1,0 +1,23 @@
+﻿@{
+    var isUserLoggedin = User.Identity.IsAuthenticated;
+    //string currentUrl = HttpContext.
+}
+
+
+<script>
+    if ('@isUserLoggedin' == "True"){
+        console.log("User is logged in")
+    }
+
+    else
+    {
+
+        const itemsIncart = getCart();
+
+        const cartLabel = document.querySelector('#total-quantity-label');
+
+        cartLabel.textContent = itemsIncart.length
+
+        updateCartMenu()
+    }
+</script>

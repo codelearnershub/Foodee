@@ -1,5 +1,10 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using FOODEE.Context;
 using FOODEE.Interface;
+using FOODEE.Models.ViewModel;
 using FOODEE.Repository;
 using FOODEE.Service;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -10,11 +15,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace FOODEE
 {
@@ -30,28 +30,41 @@ namespace FOODEE
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors();
-            services.AddControllersWithViews()
-                .AddNewtonsoftJson()
-                .AddXmlDataContractSerializerFormatters();
-            services.AddDbContext<FoodeeDbContext>(options =>
-            options.UseMySQL(Configuration.GetConnectionString("FoodeeDbContext")));
+            services.AddControllersWithViews();
+            
+            services.AddDbContext<FOODEEDbContext>(options =>
+                options.UseMySQL(Configuration.GetConnectionString("FOODEEDbContext")));
+            //services.Configure<PaystackSettings>(Configuration.GetSection("Paystack"));
+            
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserService>();
-            services.AddScoped<IMenuItemRepository, MenuItemRepository>();
-            services.AddScoped<IMenuItemService, MenuItemService>();
-            services.AddScoped<IMenuRepository, MenuRepository>();
-            services.AddScoped<IMenuService, MenuService>();
-            services.AddScoped<IMenuMenuItemRepository, MenuMenuItemRepository>();
-            services.AddScoped<IMenuMenuItemService, MenuMenuItemService>();
-            services.AddScoped<IOrderRepository, OrderRepository>();
-            services.AddScoped<IOrderService, OrderService>();
-            services.AddScoped<IOrderItemRepository, OrderItemRepository>();
-            services.AddScoped<IOrderItemService, OrderItemService>();
+            
             services.AddScoped<IRoleRepository, RoleRepository>();
             services.AddScoped<IRoleService, RoleService>();
-            services.AddScoped<IUserRoleRepository, UserRoleRepository>();
-            services.AddScoped<IUserRoleService, UserRoleService>();
+            
+            services.AddScoped<IUserRoleRepository, UserRoleRepository>(); 
+            services.AddScoped<IUserRoleService, UserRoleService>();   
+            
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddScoped<ICustomerService, CustomerService>();
+            
+            services.AddScoped<IMenuRepository, MenuRepository>();
+            services.AddScoped<IMenuService, MenuService>(); 
+            
+            services.AddScoped<IMenuItemRepository, MenuItemRepository>();
+            services.AddScoped<IMenuItemService, MenuItemService>(); 
+            
+            services.AddScoped<IMenuMenuItemRepository, MenuMenuItemRepository>();
+            services.AddScoped<IMenuMenuItemService, MenuMenuItemService>();
+            
+            services.AddScoped<ICartItemRepository, CartItemRepository>();
+            
+            services.AddScoped<ICartRepository, CartRepository>();
+            services.AddScoped<ICartService, CartService>();
+            
+            services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped<IOrderService, OrderService>();
+            
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(config =>
             {
                 config.LoginPath = "/User/Login";
@@ -83,6 +96,7 @@ namespace FOODEE
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+ 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
@@ -91,6 +105,7 @@ namespace FOODEE
             app.UseAuthentication();
 
             app.UseAuthorization();
+
 
             app.UseEndpoints(endpoints =>
             {

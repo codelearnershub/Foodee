@@ -12,8 +12,8 @@ namespace FOODEE.Repository
 {
     public class MenuRepository: IMenuRepository
     {
-        private readonly FoodeeDbContext _dbContext;
-        public MenuRepository(FoodeeDbContext dbContext)
+        private readonly FOODEEDbContext _dbContext;
+        public MenuRepository(FOODEEDbContext dbContext)
         {
             _dbContext = dbContext;
         }

@@ -14,6 +14,5 @@ namespace FOODEE.Models
         public decimal Price { get; set; }
         public string Image { get; set; }
         public ICollection<MenuMenuItem> MenuMenuItems { get; set; } = new HashSet<MenuMenuItem>();
-        public ICollection<OrderItem> OrderItem { get; set; } = new HashSet<OrderItem>();
     }
 }

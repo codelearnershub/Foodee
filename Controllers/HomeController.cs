@@ -1,5 +1,4 @@
-﻿using FOODEE.Interface;
-using FOODEE.Models;
+﻿using FOODEE.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -7,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using FOODEE.Interface;
 
 namespace FOODEE.Controllers
 {
@@ -15,17 +15,24 @@ namespace FOODEE.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly IMenuItemService _menuitemService;
 
-        public HomeController(IMenuItemService menuitemService, ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IMenuItemService menuitemService)
         {
             _logger = logger;
             _menuitemService = menuitemService;
         }
+        //public IActionResult Index()
+        //{
+        //    var menuitems = _menuitemService.GetAll();
+        //    // return View(menuitems);
+
+        //    return RedirectToAction("Index", "Home");
+        //}
         public IActionResult Index()
         {
-            //var menuitems = _menuitemService.GetAll();
-            //return View(menuitems);
+            var menuitems = _menuitemService.GetAll();
+            // return View(menuitems);
 
-            return RedirectToAction("IndexAnonymous","MenuItem");
+            return RedirectToAction("IndexAnonymous", "MenuItem");
         }
         public IActionResult Privacy()
         {
@@ -36,11 +43,9 @@ namespace FOODEE.Controllers
         {
             IEnumerable<MenuItem> menuitems = _menuitemService.Search(search);
             return View("Index", menuitems);
+     
         }
-        public IActionResult ViewCart()
-        {
-            return View();
-        }
+        
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

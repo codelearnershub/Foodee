@@ -11,8 +11,8 @@ namespace FOODEE.Repository
 {
     public class UserRoleRepository: IUserRoleRepository
     {
-        private readonly FoodeeDbContext _dbContext;
-        public UserRoleRepository(FoodeeDbContext dbContext)
+        private readonly FOODEEDbContext _dbContext;
+        public UserRoleRepository(FOODEEDbContext dbContext)
         {
             _dbContext = dbContext;
         }

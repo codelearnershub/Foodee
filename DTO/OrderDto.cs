@@ -13,6 +13,5 @@ namespace FOODEE.DTO
         public string DeliveryAddress { get; set; }
         public decimal TotalPrice { get; set; }
         public User User { get; set; }
-        public List<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
     }
 }
