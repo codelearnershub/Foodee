@@ -1,6 +1,6 @@
 ﻿@model FOODEE.Models.ViewModel.MenuItemVM
 @{
-    Layout = "_Layout";
+    Layout = "_SuperAdminDashboard";
 }
 
 @{
@@ -45,7 +45,7 @@
     </div>
 </div>
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="IndexAdmin" asp-controller="MenuItem">Back to List</a>
 </div>
 
 @section Scripts {

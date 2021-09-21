@@ -1,4 +1,5 @@
 ﻿using FOODEE.Context;
+using FOODEE.DTO;
 using FOODEE.Interface;
 using FOODEE.Models;
 using Microsoft.EntityFrameworkCore;
@@ -11,8 +12,8 @@ namespace FOODEE.Repository
 {
     public class MenuRepository: IMenuRepository
     {
-        private readonly FoodeeDbContext _dbContext;
-        public MenuRepository(FoodeeDbContext dbContext)
+        private readonly FOODEEDbContext _dbContext;
+        public MenuRepository(FOODEEDbContext dbContext)
         {
             _dbContext = dbContext;
         }
@@ -22,6 +23,7 @@ namespace FOODEE.Repository
             _dbContext.SaveChanges();
             return menu;
         }
+
         public Menu FindById(int id)
         {
             return _dbContext.Menus.Find(id);
@@ -45,9 +47,14 @@ namespace FOODEE.Repository
         public List<Menu> GetAll()
         {
             return _dbContext.Menus
-                .Include(m => m.MenuItems)
+                .Include(m => m.MenuMenuItems)
                 .ToList();
 
+        }
+
+        public IEnumerable<Menu> GetAllMenus()
+        {
+            return _dbContext.Menus.ToList();
         }
         public bool Exists(int id)
         {

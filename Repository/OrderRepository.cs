@@ -10,8 +10,8 @@ namespace FOODEE.Repository
 {
     public class OrderRepository:IOrderRepository
     {
-        private readonly FoodeeDbContext _dbContext;
-        public OrderRepository(FoodeeDbContext dbContext)
+        private readonly FOODEEDbContext _dbContext;
+        public OrderRepository(FOODEEDbContext dbContext)
         {
             _dbContext = dbContext;
         }

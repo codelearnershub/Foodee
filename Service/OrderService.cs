@@ -45,36 +45,5 @@ namespace FOODEE.Service
         {
             return orderRepository.Exists(id);
         }
-
-        public List<OrderItem> Menu(int userId, IEnumerable<Menu> orderItems, string deliveryAddress)
-        {
-            var menuitemDictionary = orderItems.ToDictionary(o => o.MenuItemId);
-            var menuitems = menuitemRepository.GetAll(menuitemDictionary.Keys);
-            var order = new Order
-            {
-                Id = userId,
-                DeliveryAddress = deliveryAddress,
-                Status = OrderStatus.Default,
-                CreatedAt = DateTime.Now
-            };
-            foreach (var menuitem in menuitems)
-            {
-                var quantity = menuitemDictionary[menuitem.Id].Quantity;
-                var price = menuitem.Price;
-                var orderItem = new OrderItem
-                {
-                    Id = menuitem.Id,
-                    Quantity = quantity,
-                    Order = order,
-                    UnitPrice = price,
-                    MenuItem = menuitem
-                };
-                order.TotalPrice += price * quantity;
-                order.OrderItems.Add(orderItem);
-            }
-
-            orderRepository.Add(order);
-            return order.OrderItems.ToList();
-        }
     }
 }

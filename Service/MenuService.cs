@@ -1,4 +1,5 @@
-﻿using FOODEE.Interface;
+﻿using FOODEE.DTO;
+using FOODEE.Interface;
 using FOODEE.Models;
 using System;
 using System.Collections.Generic;
@@ -11,18 +12,28 @@ namespace FOODEE.Service
     {
         private readonly IMenuRepository menuRepository;
 
-        public MenuService(IMenuRepository categoryRepository)
+        public MenuService(IMenuRepository menuRepository)
         {
-            this.menuRepository = categoryRepository;
+            this.menuRepository = menuRepository;
         }
         public Menu FindById(int id)
         {
             return menuRepository.FindById(id);
         }
 
-        public Menu Add(Menu menu)
+        public Menu Add(MenuDto menuDto)
         {
-            return menuRepository.Add(menu);
+
+            var menu = new Menu
+            {
+                Id = menuDto.Id,
+                Image = menuDto.Image,
+                Quantity = menuDto.Quantity,
+                Description = menuDto.Description,
+                Name = menuDto.Name,
+            };
+            menuRepository.Add(menu);
+            return menu;
         }
 
         public Menu Update(Menu menu)
@@ -35,6 +46,18 @@ namespace FOODEE.Service
             menuRepository.Delete(id);
         }
 
+        public IEnumerable<Menu> GetAllMenus()
+        {
+            var menus = menuRepository.GetAllMenus().Select(c => new Menu
+            {
+                Id = c.Id,
+                CreatedAt = DateTime.Now,
+                Name = c.Name,
+                Image = c.Image,
+            }).ToList();
+
+            return menus;
+        }
         public List<Menu> GetAll()
         {
             return menuRepository.GetAll();

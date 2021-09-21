@@ -11,8 +11,8 @@ namespace FOODEE.Repository
 {
     public class MenuItemRepository:IMenuItemRepository
     {
-        private readonly FoodeeDbContext _dbContext;
-        public MenuItemRepository(FoodeeDbContext dbContext)
+        private readonly FOODEEDbContext _dbContext;
+        public MenuItemRepository(FOODEEDbContext dbContext)
         {
             _dbContext = dbContext;
         }
@@ -30,7 +30,7 @@ namespace FOODEE.Repository
         }
         public MenuItem FindById(int id)
         {
-            return _dbContext.MenuItems.Find(id);
+            return _dbContext.MenuItems.SingleOrDefault(m => m.Id==id);
         }
         public void Delete(int id)
         {
@@ -47,7 +47,7 @@ namespace FOODEE.Repository
 
         public List<MenuItem> GetAll()
         {
-            return _dbContext.MenuItems.Include(m => m.MenuMenuItems).ThenInclude(m => m.Menu).ToList();
+            return _dbContext.MenuItems.Include(m => m.MenuMenuItems).ThenInclude(m => m.Menu).OrderByDescending(d=> d.CreatedAt).ToList();
 
         }
 

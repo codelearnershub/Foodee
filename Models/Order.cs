@@ -9,12 +9,15 @@ namespace FOODEE.Models
 {
     public class Order:BaseEntity
     {
+        public Customer Customer { get; set; }
         public int userId { get; set; }
-        public bool IsPaid { get; set; } 
+        
+        public Cart Cart { get; set; }
+        public int CartId { get; set; }
+        //public Payment Payment { get; set; }
+        public int PaymentId { get; set; }
         public string DeliveryAddress { get; set; }
-        public decimal TotalPrice { get; set; }
         public OrderStatus Status { get; set; }
-        public User User { get; set; }
-        public List<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
+        public DateTime DateDelivered { get; set; }
     }
 }

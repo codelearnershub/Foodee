@@ -1,0 +1,93 @@
+﻿@model Cart
+@using FOODEE.Models.ViewModel
+
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Cart";
+    CartVM.CartItemComparer cartItemComparer = new CartVM.CartItemComparer();
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="card w-50">
+                <div class="card-header text-center tex-white ">
+                    <h5 class="text-success ">Complete Order</h5>
+                </div>
+                <div class="card-body font-weight-light" id="cart-menu">
+                    <table class="timetable_sub">
+                        <thead class="">
+                        <tr>
+                            <th>Product</th><br/>
+                            <th>Price</th><br/>
+                            <th>Quantity</th><br/>
+                            <th>Sub-Total</th><br/><br/>
+                            <th>Remove <i class="fas fa-trash-alt"></i></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach (var item in Model.CartItems.Distinct(cartItemComparer))
+                        {
+                            <tr class="rem1">
+                                <td class="invert" id="item-name1">@item.MenuItem.Name</td>
+                                <td class="invert" id="price_${item.id}">@item.MenuItem.Price</td>
+                                <td class="invert text-dark">
+                                    <button onclick="decrementQuantity(@item.MenuItemId)">-</button>
+                                    <input disabled class="text-center " style="width:40px" type="text" name="quantity" value="@Model.CartItems.Count(i => i.MenuItem.Id == item.MenuItem.Id)" min="1" id=@($"quantity_{item.MenuItemId}")/>
+                                    <button onclick="incrementQuantity(@item.MenuItemId)">+</button>
+                                </td>
+                                <td class="invert" id="totalPrice_${item.id}">
+                                    ₦ @(item.MenuItem.Price * @Model.CartItems.Count(i => i.MenuItem.Id == item.MenuItem.Id))
+                                </td>
+                                <td class="invert">
+                                <div class="rem">
+                                    <a asp-action="RemoveFromCart" asp-route-id=@item.MenuItemId>
+                                        <button class="btn btn-sm btn-danger ">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </a>
+                                </div>
+                                <td/>
+                            </tr>
+                        }
+
+                        </tbody>
+                    </table>
+                </div>
+                <a style="color: black; width:100px" asp-area="" class="btn" asp-controller="Cart" asp-action="CheckOut">Checkout</a>
+                <a style="color: orangered; width:200px" asp-area="" class="btn" asp-controller="Home" asp-action="Index">Continue Shopping</a>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="card w-50">
+                <div class="card-header text-center tex-white ">
+                    <h5 class="text-success ">Complete Order</h5>
+                </div>
+                <div class="card-body font-weight-light" id="cart-menu">
+
+                </div>
+                <a style="color: black; width:100px" asp-area="" class="btn" asp-controller="Cart" asp-action="CheckOut">Checkout</a>
+                <a style="color: orangered; width:200px" asp-area="" class="btn" asp-controller="Home" asp-action="Index">Continue Shopping</a>
+            </div>
+        </div>
+    </div>
+    <script>
+    function numberWithCommas(x) {
+        let newNumber = x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+        return newNumber
+    }
+
+    let comma = document.getElementsByClassName("comma");
+
+    for (var i = 0; i < comma.length; i++) {
+        let result = numberWithCommas(comma[i].innerHTML);
+        document.getElementsByClassName("comma")[i].innerHTML = result;
+    }
+</script>
+}

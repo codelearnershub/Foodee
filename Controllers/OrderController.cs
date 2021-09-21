@@ -13,9 +13,11 @@ namespace FOODEE.Controllers
     public class OrderController : Controller
     {
         private readonly IOrderService _orderService;
-        public OrderController(IOrderService orderService)
+        private readonly IUserService _userService;
+        public OrderController(IOrderService orderService, IUserService userService)
         {
             _orderService = orderService;
+            _userService = userService;
         }
         public IActionResult Index()
         {
@@ -38,7 +40,7 @@ namespace FOODEE.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public IActionResult Add()
         {
             return View();
         }
@@ -49,6 +51,7 @@ namespace FOODEE.Controllers
         {
             if (ModelState.IsValid)
             {
+                 
                 _orderService.Add(order);
 
             }
@@ -119,24 +122,24 @@ namespace FOODEE.Controllers
             return View();
         }
 
-
+        [Authorize]
         public IActionResult CheckOut()
         {
-            if(User.Identity.IsAuthenticated)
-            {
-                return View();
-            }
-
-            return RedirectToAction("Login","User");
+            int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            User userlogin = _userService.FindById(userId);
+            ViewBag.UserName = $"{userlogin.FirstName} .{userlogin.LastName[0]}";
+            ViewBag.Address =  userlogin.Address;
+            ViewBag.Email = userlogin.Email;
+            ViewBag.PhoneNumber = userlogin.PhoneNumber;
+            return View();     
         }
-
-
-        [HttpPost]
-        public IActionResult Menu(IEnumerable<Menu> orders, string deliveryAddress)
-        {
-            var customerId = Convert.ToInt32(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-            var response = _orderService.Menu(customerId, orders, deliveryAddress);
-            return View("Confirmation", response);
-        }
+        
+        //[HttpPost]
+        //public IActionResult Menu(IEnumerable<Menu> orders, string deliveryAddress)
+        //{
+        //    var customerId = Convert.ToInt32(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+        //    var response = _orderService.Menu(customerId, orders, deliveryAddress);
+        //    return View("Confirmation", response);
+        //}
     }
 }

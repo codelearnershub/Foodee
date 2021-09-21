@@ -10,9 +10,9 @@ namespace FOODEE.Repository
 {
     public class UserRepository: IUserRepository
     {
-        private readonly FoodeeDbContext _dbContext;
+        private readonly FOODEEDbContext _dbContext;
 
-        public UserRepository(FoodeeDbContext dbContext)
+        public UserRepository(FOODEEDbContext dbContext)
         {
             _dbContext = dbContext;
         }

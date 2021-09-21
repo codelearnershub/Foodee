@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace FOODEE.Controllers
@@ -20,17 +21,39 @@ namespace FOODEE.Controllers
         private readonly IMenuItemService _menuitemService;
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly IMenuService _menuService;
+        private readonly ICartService _cartService;
 
-        public MenuItemController(IMenuItemService menuitemService, IWebHostEnvironment webHostEnvironmrnt, IMenuService menuService)
+        public MenuItemController(IMenuItemService menuitemService, IWebHostEnvironment webHostEnvironmrnt, IMenuService menuService, ICartService cartService)
         {
             _menuitemService = menuitemService;
             _webHostEnvironment = webHostEnvironmrnt;
             _menuService = menuService;
+            _cartService = cartService;
         }
 
         public IActionResult Index()
         {
             return View(_menuitemService.GetAll());
+        }
+        [Authorize]
+        public IActionResult IndexAdmin()
+        {
+            IEnumerable<MenuItem> menuitems = _menuitemService.GetAll();
+
+            return View(menuitems);
+        }
+
+        public IActionResult IndexAnonymous()
+        {
+            var model = new HomeVM.IndexAnonymous
+            {
+                MenuItems = _menuitemService.GetAll(),
+                NumberOfCartItems = (User.Identity.IsAuthenticated && User.IsInRole("customer"))
+                    ? _cartService.GetNumberOfCartItems(
+                        Convert.ToInt32(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                    : 0
+            };
+            return View(model);
         }
 
         [AllowAnonymous]
@@ -160,10 +183,7 @@ namespace FOODEE.Controllers
         public IActionResult DeleteConfirmed(int id)
         {
             _menuitemService.Delete(id);
-            return View(new
-            {
-                redirectUri = Url.Action(nameof(Index))
-            });
+            return RedirectToAction(nameof(Index));
         }
     }
 }

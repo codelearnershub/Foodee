@@ -1,6 +1,7 @@
 ﻿using FOODEE.Context;
 using FOODEE.Interface;
 using FOODEE.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +11,8 @@ namespace FOODEE.Repository
 {
     public class MenuMenuItemRepository: IMenuMenuItemRepository
     {
-        private readonly FoodeeDbContext _dbContext;
-        public MenuMenuItemRepository(FoodeeDbContext dbContext)
+        private readonly FOODEEDbContext _dbContext;
+        public MenuMenuItemRepository(FOODEEDbContext dbContext)
         {
             _dbContext = dbContext;
         }
@@ -26,6 +27,14 @@ namespace FOODEE.Repository
             _dbContext.MenuMenuItems.Update(menumenuitem);
             _dbContext.SaveChanges();
             return menumenuitem;
+        }
+        public List<MenuMenuItem> GetByMenu(int menuId)
+        {
+            return _dbContext.MenuMenuItems.Include(c => c.MenuItem).Where(c => c.MenuId == menuId).ToList();
+        }
+        public List<MenuMenuItem> GetMenuByMenuItemId(int menuitemId)
+        {
+            return _dbContext.MenuMenuItems.Include(p => p.Menu).Where(p => p.MenuItemId == menuitemId).ToList();
         }
         public MenuMenuItem FindById(int id)
         {

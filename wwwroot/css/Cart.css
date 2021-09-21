@@ -1,4 +1,19 @@
-﻿
+﻿.navbar, .navbar-inverse {
+    background: white !important;
+}
+
+#home-menu a:hover{
+    color: darkorange;
+    font-size: 20px;
+    font-family:'Times New Roman';
+}
+
+#home-menu a{
+    color: orange;
+    font-size: 15px;
+    font-family: 'Times New Roman';
+}
+
 .promobg
 
 {
@@ -135,3 +150,234 @@
         background: #6fb32b;
         outline: none;
     }
+
+
+
+
+.card-size {
+    width: 400px;
+    height: 450px;
+    overflow-x: hidden;
+}
+
+
+.card-edge {
+    border-top-left-radius: 0%;
+    border-top-right-radius: 10%;
+    border-bottom-left-radius: 10%;
+    border-bottom-right-radius: 0%;
+}
+
+.img {
+    margin-left: -15px;
+    width: 282px;
+    height: 250px;
+    border-top-left-radius: 0%;
+    border-top-right-radius: 10%;
+    border-bottom-left-radius: 10%;
+    border-bottom-right-radius: 0%;
+}
+
+.smalltext {
+    margin-top: 10px;
+    font-size: 12px;
+}
+
+.bigtext {
+    font-size: 20px;
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.mediumtext {
+    font-size: 15px;
+}
+
+.button {
+    font-size: 20px;
+    color: white;
+    margin-top: 4px;
+    margin-left: 82%;
+    width: 60px;
+    border-top-left-radius: 30%;
+    border-top-right-radius: 0%;
+    border-bottom-left-radius: 0%;
+    border-bottom-right-radius: 0%;
+    background-color: orange;
+}
+
+.money {
+    margin-left: 25%;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: end;
+    font-weight: bold;
+}
+
+.dis {
+    display: grid;
+}
+.row {
+    display: -ms-flexbox; /* IE10 */
+    display: flex;
+    -ms-flex-wrap: wrap; /* IE10 */
+    flex-wrap: wrap;
+    margin: 0 -16px;
+}
+
+.col-25 {
+    -ms-flex: 25%; /* IE10 */
+    flex: 25%;
+}
+
+.col-50 {
+    -ms-flex: 50%; /* IE10 */
+    flex: 50%;
+}
+
+.col-75 {
+    -ms-flex: 75%; /* IE10 */
+    flex: 75%;
+}
+
+.col-25,
+.col-50,
+.col-75 {
+    padding: 0 16px;
+}
+
+.container {
+    background-color: #f2f2f2;
+    padding: 5px 20px 15px 20px;
+    border: 1px solid lightgrey;
+    border-radius: 3px;
+}
+
+input[type=text] {
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+label {
+    margin-bottom: 10px;
+    display: block;
+}
+
+.icon-container {
+    margin-bottom: 20px;
+    padding: 7px 0;
+    font-size: 24px;
+}
+
+.btn {
+    background-color: #04AA6D;
+    color: white;
+    padding: 12px;
+    margin: 10px 0;
+    border: none;
+    width: 100%;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 17px;
+}
+
+    .btn:hover {
+        background-color: #45a049;
+    }
+
+span.price {
+    float: right;
+    color: grey;
+}
+
+/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other (and change the direction - make the "cart" column go on top) */
+@media (max-width: 800px) {
+    .row {
+        flex-direction: column-reverse;
+    }
+
+    .col-25 {
+        margin-bottom: 20px;
+    }
+}
+
+
+/*Register*/
+
+/** {
+    box-sizing: border-box
+}*/
+
+/* Full-width input fields */
+/*input[type=text], input[type=password] {
+    width: 50%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+}
+
+    input[type=text]:focus, input[type=password]:focus {
+        background-color: #ddd;
+        outline: none;
+    }
+
+hr {
+    border: 1px solid #f1f1f1;
+    margin-bottom: 25px;
+}*/
+
+/* Set a style for all buttons */
+/*button {
+    color: white;
+    padding: 1px 10px;
+    margin: 4px 0;
+    border: none;
+    cursor: pointer;
+    width: 10%;
+    opacity: 0.9;
+}
+
+    button:hover {
+        opacity: 1;
+    }*/
+
+/* Extra styles for the cancel button */
+/*.cancelbtn {
+    padding: 10px 10px;
+    background-color: orangered;
+}*/
+
+/* Float cancel and signup buttons and add an equal width */
+/*.cancelbtn, .signupbtn {
+    float: left;
+    width: 20%;
+}*/
+
+/* Add padding to container elements */
+/*.container {
+    padding: 10px;
+}*/
+
+/* Clear floats */
+/*.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}*/
+
+/* Change styles for cancel button and signup button on extra small screens */
+/*@media screen and (max-width: 100px) {
+    .cancelbtn, .signupbtn {
+        width: 50%;
+    }
+}*/
+
+
+
+
+
+

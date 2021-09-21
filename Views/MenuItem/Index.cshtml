@@ -1,45 +1,113 @@
-﻿@*@model IEnumerable<FOODEE.Models.MenuItem>
+﻿@model IEnumerable<MenuItem>
+@{ ViewData["Title"] = "Menu Item"; }
 @{
-    Layout = "_Layout";
+    Layout = "_SuperAdminDashboard";
 }
-
-@{
-    ViewData["Title"] = "Index";
-}
-<h1 class="text-center">Available Foods</h1>
-
-<div class="card">
-    <div class="card-body">
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Menu</th>
-                    <th>MenuItem</th>
-                    <th>Price</th>
-                    <th>Description</th>
-                    <th>Action</th>
-
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var product in Model)
-                {
-                <tr>
-                    <td> @product.MenuId </td>
-                    <td> @product.Name </td>
-                    <td> @product.Price </td>
-                    <td> @product.Description </td>
-                    <td>
-                        <a class="btn btn-success" asp-action="Update" asp-route-id="@product.Id">Update </a>
-                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@product.Id">Delete</a>
-                    </td>
-                </tr>
-                }
-            </tbody>
-        </table>
-    </div>
+<h6 class="font-weight-bold font-italic text-center" style="color:orangered; font-family:'Times New Roman'">@ViewBag.Menu</h6>
+<div class="col-6 text-right">
+    @*<a asp-action="Add" class="btn btn-outline-secondary nav-link font-weight-bold text-dark"><i class="fas fa-plus"></i>
+        Add MenuItem
+    </a>*@
 </div>
-<br>
-<div class="mb-3 border-right">
-    <a class="btn btn-success" asp-controller="MenuItem" asp-action="Add">Add Food</a>
-</div>*@
+    <div class="row">
+        @foreach (var item in Model)
+        {
+        <div id="cart-products" class="col-lg-3 col-sm-12 col-md-6 mr-2 mb-5 card card-size card-edge" style="border-width:1px; border-color:orangered; margin-left:80px">
+            <a asp-action="Details" asp-controller="MenuItem" asp-route-id="@item.Id" title="FOODEE" data-toggle="popover" data-trigger="hover" data-content="Click add to cart to enjoy our products">
+                <img src="~/Image/@item.Image" class="img img-responsive zoom" alt="Image">
+            </a>
+            <div>
+                <span class="bigtext">@item.Name</span><span class="money">&#8358 <span class="comma">@item.Price</span></span>
+            </div>
+
+            <span class="mediumtext">Served with French Fries + Drinks</span>
+            <p class="smalltext">@item.Description</p>
+            <button type="submit" onclick="addToCart(this)" id="item-@item.Id" data-name="@item.Name" data-price="@item.Price" data-id="@item.Id" class="" style="width:70%; background-color:orangered; margin-left:20px; margin-right:20px" data-toggle="modal" data-target="#cart-modal"><span class="font-weight-bold" style="color:white; font-family:'Times New Roman'">+ Cart</span></button>
+        </div>
+
+        }
+
+    </div>
+
+
+<div id="cart-items"></div>
+
+    <div id="cart-modal" class="modal fade align-content-center" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered ">
+            <div class="modal-content">
+                <div class="container bg-light">
+                    <div class="row justify-content-center">
+                        <div>
+                            <h5 class="text-dark">FOODEE CART </h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-header ">
+
+                    <h5 class="modal-title text-success" id="menuitem-name">Food </h5>
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                &#8358 <h5 id="item-price" class="text-dark font-weight-light"></h5>
+                            </div>
+                            <div class="col-sm-4">
+                                <input id="quantity" class="form-control col-sm-12" min="1" type="number" placeholder="Quantity" />
+                            </div>
+                            <div class="col-sm-4">
+                                &#8358 <h5 id="item-total" class="text-primary font-weight-light"></h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="modal-footer bg-light">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button href="#myModal" onclick="addToCart(this)" type="button" id="save" class="btn btn-success trigger-btn" data-toggle="modal">Add to Cart</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="myModal" class="modal fade">
+        <div class="modal-dialog modal-confirm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="icon-box">
+                        <i class="fas fa-fw fa-shopping-basket">&#xE876;</i>
+                    </div>
+                    <h4 class="modal-title w-100">Awesome!</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="text-center">Item added succesfully. Check your Cart for details.</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success btn-block" data-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function numberWithCommas(x) {
+            let newNumber = x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+            return newNumber
+        }
+
+        let comma = document.getElementsByClassName("comma");
+
+        for (var i = 0; i < comma.length; i++) {
+            let result = numberWithCommas(comma[i].innerHTML);
+            document.getElementsByClassName("comma")[i].innerHTML = result;
+        }
+
+
+    </script>
+

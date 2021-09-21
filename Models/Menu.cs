@@ -10,11 +10,11 @@ namespace FOODEE.Models
     public class Menu: BaseEntity
     {
        public string Name { get; set; }
+       public string Image { get; set; }
        public int MenuItemId { get; set; }
-       public int DisplayOrder { get; set; }
        public string Description { get; set; }
        public int Quantity { get; set; }
-       public ICollection<MenuMenuItem> MenuItems { get; set; } = new HashSet<MenuMenuItem>();
+       public ICollection<MenuMenuItem> MenuMenuItems { get; set; } = new HashSet<MenuMenuItem>();
 
     }
 }

@@ -8,8 +8,9 @@ namespace FOODEE.Enum
     public enum OrderStatus
     {
         Default = 1,
-        Delivered,
-        Cancelled,
-        InProgress
+        InProgress =2,
+        Shipped = 3,
+        Delivered = 4,
+        Cancelled = 5
     }
 }
